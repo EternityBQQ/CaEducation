@@ -1,18 +1,12 @@
 package com.itcast.education.controller;
 
-import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.controller.dto.HomePageDto;
-import com.itcast.education.model.course.Course;
-import com.itcast.education.model.media.MediaOutput;
 import com.itcast.education.model.base.ResponseModel;
-import com.itcast.education.service.CourseService;
 import com.itcast.education.service.MediaOutputService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 基础controller
