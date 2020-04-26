@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.education.mapper.MediaOutputMapper">
+    <!--公共查询-->
+    <sql id="baseSelect">
+        SELECT mo.media_id,
+            mo.media_type,
+            mo.url,
+            mo.media_icon,
+            mo.media_icon_color,
+            mo.media_icon_badge,
+            mo.media_icon_name,
+            mo.create_time,
+            mo.create_person,
+            mo.update_time,
+            mo.update_person
+        FROM media_output mo
+    </sql>
+    <!--结果集映射-->
+    <resultMap id="baseMap" type="com.itcast.education.model.media.MediaOutput">
+        <id column="media_id" jdbcType="BIGINT" property="mediaId"/>
+        <result column="media_type" jdbcType="VARCHAR" property="mediaType"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="media_icon" jdbcType="VARCHAR" property="mediaIcon"/>
+        <result column="media_icon_color" jdbcType="VARCHAR" property="mediaIconColor"/>
+        <result column="media_icon_badge" jdbcType="INTEGER" property="mediaIconBadge"/>
+        <result column="media_icon_name" jdbcType="VARCHAR" property="mediaIconName"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_person" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="update_person" jdbcType="VARCHAR" property="updatePerson"/>
+    </resultMap>
+
+    <!--条件查询-->
+    <select id="queryMediaByType" resultMap="baseMap">
+        <include refid="baseSelect"/>
+        <where>
+            <if test="type != null">
+                mo.media_type = #{type}
+            </if>
+        </where>
+        <if test="size > 0">
+            LIMIT #{size}
+        </if>
+    </select>
+</mapper>
