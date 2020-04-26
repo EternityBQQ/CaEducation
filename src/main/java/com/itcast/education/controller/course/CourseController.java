@@ -18,8 +18,8 @@ public class CourseController {
     private CourseService courseService;
 
     @PutMapping("/education/addCourse")
-    public ResponseModel addCourse(@RequestParam Course course) {
-        boolean result = courseService.saveCourse(course);
+    public ResponseModel addCourse(@RequestParam Course course, @RequestParam String loginId) {
+        boolean result = courseService.saveCourse(course, loginId);
         if (result) {
             return ResponseModel.ok();
         } else {
