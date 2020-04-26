@@ -7,6 +7,7 @@ import com.itcast.education.service.CourseService;
 import com.itcast.education.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class CourseServiceImpl implements CourseService {
     public boolean saveCourse(Course course, String loginId) {
         // 封装创建人和创建时间
         User person = userService.find(new User(loginId));
-        if (person == null) {
+        if (person == null && StringUtils.isEmpty(person.getUserRealName())) {
             return false;
         }
         course.setCreatePerson(person.getUserRealName());

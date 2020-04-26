@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.education.mapper.UserMapper">
+    <!--公共查询-->
+    <sql id="baseSelect">
+        SELECT eu.user_id,
+            eu.username,
+            eu.password,
+            eu.user_real_name,
+            eu.mobile,
+            eu.email,
+            eu.create_time,
+            eu.create_person
+        FROM education_user eu
+    </sql>
+    <!--结果集映射-->
+    <resultMap id="baseMap" type="com.itcast.education.model.user.User">
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="user_real_name" jdbcType="VARCHAR" property="userRealName"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_person" jdbcType="VARCHAR" property="createPerson"/>
+    </resultMap>
+    <!--列表查询-->
+    <select id="findUser" parameterType="com.itcast.education.model.user.User" resultMap="baseMap">
+        <include refid="baseSelect"/>
+        <where>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId}
+            </if>
+        </where>
+    </select>
+</mapper>
