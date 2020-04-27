@@ -1,9 +1,11 @@
 package com.itcast.education.controller.course;
 
 import com.itcast.education.config.ErrorMessage;
+import com.itcast.education.controller.dto.CourseDto;
 import com.itcast.education.model.base.ResponseModel;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.service.CourseService;
+import com.itcast.education.utils.CommonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -28,7 +30,9 @@ public class CourseController {
 
     @ApiOperation(value = "添加课程", notes = "传入课程相关信息")
     @PutMapping("/addCourse")
-    public ResponseModel addCourse(Course course, @RequestParam String loginId) {
+    public ResponseModel addCourse(CourseDto courseDto, @RequestParam String loginId) {
+        // DTO转化为实体对象
+        Course course = (Course) CommonUtil.convertDto2Entity(courseDto, Course.class);
         boolean result = courseService.saveCourse(course, loginId);
         if (result) {
             return ResponseModel.ok();

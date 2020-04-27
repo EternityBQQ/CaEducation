@@ -1,6 +1,8 @@
 package com.itcast.education.model.course;
 
 import com.itcast.education.model.base.BaseModel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Course extends BaseModel<Course> {
     private String courseId;
     private String courseName;

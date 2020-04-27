@@ -1,6 +1,10 @@
 package com.itcast.education;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itcast.education.controller.dto.CourseDto;
+import com.itcast.education.model.base.BaseModel;
+import com.itcast.education.model.course.Course;
+import com.itcast.education.utils.CommonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,6 +24,21 @@ class EducationApplicationTests {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void convertTest() {
+        CourseDto dto = new CourseDto();
+        dto.setCourseName("测试课程");
+        dto.setCoursePrice(250d);
+        dto.setDiscountPrice(200d);
+        dto.setSaleCourse(25);
+        dto.setTags(new String[] {
+                "1", "2", "3"
+        });
+        dto.setCourseUrl("http://test");
+        Object model = CommonUtil.convertDto2Entity(dto, Course.class);
+        System.out.println(model);
     }
 
 }
