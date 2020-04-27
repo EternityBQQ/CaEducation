@@ -1,10 +1,19 @@
 package com.itcast.education.model.base;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 /**
  * 基础Model
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BaseModel<T extends BaseModel> {
     /**
      * 创建时间
@@ -22,36 +31,4 @@ public class BaseModel<T extends BaseModel> {
      * 更新人ID
      */
     private String updatePerson;
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getCreatePerson() {
-        return createPerson;
-    }
-
-    public void setCreatePerson(String createPerson) {
-        this.createPerson = createPerson;
-    }
-
-    public String getUpdatePerson() {
-        return updatePerson;
-    }
-
-    public void setUpdatePerson(String updatePerson) {
-        this.updatePerson = updatePerson;
-    }
 }
