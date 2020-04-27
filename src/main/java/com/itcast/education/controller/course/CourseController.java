@@ -4,9 +4,13 @@ import com.itcast.education.config.ErrorMessage;
 import com.itcast.education.model.base.ResponseModel;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.service.CourseService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,12 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zheng.zhang
  */
 @RestController
+@Api(tags = "课程接口")
+@RequestMapping("/education")
 public class CourseController {
+    private Logger LOG = LoggerFactory.getLogger(CourseController.class);
+
     @Autowired
     private CourseService courseService;
 
     @ApiOperation(value = "添加课程", notes = "传入课程相关信息")
-    @PutMapping("/education/addCourse")
+    @PutMapping("/addCourse")
     public ResponseModel addCourse(Course course, @RequestParam String loginId) {
         boolean result = courseService.saveCourse(course, loginId);
         if (result) {

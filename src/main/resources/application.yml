@@ -17,3 +17,22 @@ spring:
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
   type-aliases-package: com.itcast.education.model
+
+#swagger 配置
+swagger:
+  title: CaEducation测试Swagger APIs
+  desc: 基于springBoot编写的RESful-API，CaEducation的后端swagger接口，统一在该平台示例。
+  version: 0.0.1.SNAPSHOT
+  termsOfServiceUrl: javascript:void(0)
+  #项目名称
+  license: CaEducation
+  #项目地址
+  licenseUrl: javascript:void(0)
+  #API所在的包
+  basePackage: com.itcast.education.controller
+  #组名
+  groupName: baseModule
+  #作者信息
+  contactName: zheng.zhang
+  contactUrl: https://github.com/EternityBQQ/CaEducation.git
+  contactEmail: 2215751025@qq.com
