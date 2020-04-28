@@ -24,9 +24,9 @@ swagger:
   desc: 基于springBoot编写的RESful-API，CaEducation的后端swagger接口，统一在该平台示例。
   version: 0.0.1.SNAPSHOT
   termsOfServiceUrl: javascript:void(0)
-  #项目名称
-  license: CaEducation
-  #项目地址
+  #许可证
+  license: 涨涨开发
+  #许可证网站
   licenseUrl: javascript:void(0)
   #API所在的包
   basePackage: com.itcast.education.controller

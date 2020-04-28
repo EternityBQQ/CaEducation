@@ -8,6 +8,7 @@ import com.itcast.education.service.CourseService;
 import com.itcast.education.utils.CommonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,17 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @ApiOperation(value = "添加课程", notes = "传入课程相关信息")
+    @ApiOperation(value = "添加课程", notes = "传入课程相关信息", authorizations = {@Authorization(value = "token")})
     @PutMapping("/addCourse")
     public ResponseModel addCourse(CourseDto courseDto, @RequestParam String loginId) {
         // DTO转化为实体对象
         Course course = (Course) CommonUtil.convertDto2Entity(courseDto, Course.class);
         boolean result = courseService.saveCourse(course, loginId);
         if (result) {
+            LOG.info("保存课程成功", course);
             return ResponseModel.ok();
         } else {
+            LOG.error("保存课程失败");
             return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, ErrorMessage.SAVE_FAILED);
         }
     }

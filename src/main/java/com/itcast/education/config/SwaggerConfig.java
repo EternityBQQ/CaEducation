@@ -1,6 +1,5 @@
 package com.itcast.education.config;
 
-import com.itcast.education.model.base.ResponseModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.*;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -56,8 +55,9 @@ public class SwaggerConfig {
                 .version(version)
                 // 项目地址
                 .termsOfServiceUrl(termsOfServiceUrl)
-                .licenseUrl(licenseUrl)
-                .license(license)
+                // 许可证信息
+                // .licenseUrl(licenseUrl)
+                // .license(license)
                 // 作者相关信息
                 .contact(new Contact(contactName, contactUrl, contactEmail))
                 .build();
@@ -93,19 +93,48 @@ public class SwaggerConfig {
                 // 对所有路径进行监控
                 .paths(PathSelectors.any())
                 .build()
-                .securitySchemes(security());
+                // securitySchemes与securityContexts作用为配置全局Authorization参数
+                .securitySchemes(securitySchemes())
+                .securityContexts(securityContexts());
         return docket;
     }
 
     /**
-     * 校验登录
+     * API授权登录
      * @return
      */
-    private List<ApiKey> security() {
+    private List<ApiKey> securitySchemes() {
         List<ApiKey> result = new ArrayList<>();
-        ApiKey apiKey = new ApiKey("用户密匙", "token", "header");
+        // 添加TOKEN验证字段
+        ApiKey apiKey = new ApiKey("token", "token", "header");
         result.add(apiKey);
         return result;
+    }
+
+    /**
+     * 接口授权
+     * @return
+     */
+    private List<SecurityContext> securityContexts() {
+        List<SecurityContext> result = new ArrayList<>();
+        SecurityContext securityContext = SecurityContext.builder().securityReferences(defaultAuth())
+                .forPaths(PathSelectors.regex("^(?!auth).*$"))
+                .build();
+        result.add(securityContext);
+        return result;
+    }
+
+    /**
+     * 默认验证
+     * @return
+     */
+    private List<SecurityReference> defaultAuth() {
+        List<SecurityReference> references = new ArrayList<>();
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        references.add(new SecurityReference("Authorization", authorizationScopes));
+        return references;
     }
 
     /**
