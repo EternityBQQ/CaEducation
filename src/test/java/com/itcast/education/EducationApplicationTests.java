@@ -33,9 +33,7 @@ class EducationApplicationTests {
         dto.setCoursePrice(250d);
         dto.setDiscountPrice(200d);
         dto.setSaleCourse(25);
-        dto.setTags(new String[] {
-                "1", "2", "3"
-        });
+        dto.setTags(null);
         dto.setCourseUrl("http://test");
         Object model = CommonUtil.convertDto2Entity(dto, Course.class);
         System.out.println(model);

@@ -13,12 +13,19 @@ public interface CourseMapper {
      * @param courseLimitNumber
      * @return
      */
-    List<Course> queryCourses(Integer courseLimitNumber);
+    List<Course> queryCourses(Integer courseLimitNumber, Course course);
 
     /**
      * 新增课程信息
      * @param course
      * @return
      */
-    boolean addCourse(Course course);
+    Integer addCourse(Course course);
+
+    /**
+     * 更新课程信息
+     * @param course
+     * @return
+     */
+    Integer updateCourse(Course course);
 }

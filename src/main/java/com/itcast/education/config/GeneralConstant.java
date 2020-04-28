@@ -26,4 +26,6 @@ public class GeneralConstant {
     public static final String SALE_AMOUNT = "saleAmount";
     public static final String IMG_URL = "imgUrl";
     public static final String TAGS = "tags";
+    // 默认用户为zheng.zhang
+    public static final String COMMON_PERSON = "zheng.zhang";
 }

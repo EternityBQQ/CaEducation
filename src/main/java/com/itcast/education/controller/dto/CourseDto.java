@@ -3,6 +3,8 @@ package com.itcast.education.controller.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+
 /**
  * @author zheng.zhang
  * @description 课程DTO
@@ -13,7 +15,7 @@ public class CourseDto {
     @ApiModelProperty("课程名称")
     private String courseName;
     @ApiModelProperty("标签")
-    private String[] tags;
+    private List<Integer> tags;
     @ApiModelProperty("课程售价")
     private Double coursePrice;
     @ApiModelProperty("折扣价格")
@@ -35,7 +37,7 @@ public class CourseDto {
         return tags.toString();
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<Integer> tags) {
         this.tags = tags;
     }
 

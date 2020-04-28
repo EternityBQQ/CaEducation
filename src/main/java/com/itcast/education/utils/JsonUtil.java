@@ -42,7 +42,7 @@ public final class JsonUtil {
             }
             result = MAPPER.readValue(json, clazz);
         } catch (IOException e) {
-            LOG.error("对象转换出错: [JsonUtil] [strToList]");
+            LOG.error("对象转换出错: [JsonUtil] [strToPojo]");
         }
         return result;
     }
