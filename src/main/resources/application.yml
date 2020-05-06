@@ -36,3 +36,6 @@ swagger:
   contactName: zheng.zhang
   contactUrl: https://github.com/EternityBQQ/CaEducation.git
   contactEmail: 2215751025@qq.com
+logging:
+  file:
+    path: C:/MyFile/Java/workspace/log
