@@ -36,6 +36,8 @@ swagger:
   contactName: zheng.zhang
   contactUrl: https://github.com/EternityBQQ/CaEducation.git
   contactEmail: 2215751025@qq.com
+
+#使用Spring默认的slf4j日志,保存日志文件到本地
 logging:
   file:
     path: C:/MyFile/Java/workspace/log
