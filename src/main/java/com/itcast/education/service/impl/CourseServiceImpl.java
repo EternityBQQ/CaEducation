@@ -5,7 +5,7 @@ import com.itcast.education.mapper.CourseMapper;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.model.user.User;
 import com.itcast.education.service.CourseService;
-import com.itcast.education.service.UserService;
+import com.itcast.education.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,7 +21,7 @@ public class CourseServiceImpl implements CourseService {
     private CourseMapper courseMapper;
 
     @Autowired
-    private UserService userService;
+    private RedisUtil redisUtil;
 
     @Override
     public List<Course> queryCourses(Integer courseLimitNumber) {
@@ -30,15 +30,17 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public boolean saveCourse(Course course, String loginId) {
+    public boolean saveCourse(Course course, String token) {
         boolean result = false;
         // 根据课程名校验去重，重复就更新
         String courseName = course.getCourseName();
         Course isExistCourse = validateIsExist(courseName);
-        User person = userService.find(new User(loginId));
+
+        // 根据Token获取登录用户=>从Redis中获取
+        User userCache = (User) redisUtil.getByKey(token);
         String personRealName = GeneralConstant.COMMON_PERSON;
-        if (person != null && !StringUtils.isEmpty(person.getUserRealName())) {
-            personRealName = person.getUserRealName();
+        if (userCache != null && !StringUtils.isEmpty(userCache.getUserRealName())) {
+            personRealName = userCache.getUserRealName();
         }
         Integer rows = 0;
         if (isExistCourse == null) {

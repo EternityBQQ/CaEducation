@@ -15,8 +15,8 @@ public interface CourseService {
     /**
      * 保存课程信息
      * @param course
-     * @param loginId
+     * @param token
      * @return
      */
-    boolean saveCourse(Course course, String loginId);
+    boolean saveCourse(Course course, String token);
 }

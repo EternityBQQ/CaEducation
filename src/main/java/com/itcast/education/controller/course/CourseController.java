@@ -31,10 +31,10 @@ public class CourseController {
 
     @ApiOperation(value = "添加课程", notes = "传入课程相关信息", authorizations = {@Authorization(value = "token")})
     @PutMapping("/addCourse")
-    public ResponseModel addCourse(CourseDto courseDto, @RequestParam String loginId) {
+    public ResponseModel addCourse(CourseDto courseDto, @RequestParam String token) {
         // DTO转化为实体对象
         Course course = (Course) CommonUtil.convertDto2Entity(courseDto, Course.class);
-        boolean result = courseService.saveCourse(course, loginId);
+        boolean result = courseService.saveCourse(course, token);
         if (result) {
             LOG.info("保存课程成功", course);
             return ResponseModel.ok();

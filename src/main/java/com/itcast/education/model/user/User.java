@@ -11,10 +11,11 @@ public class User extends BaseModel<User> {
     private String username;
     private String password;
     private String userRealName;
+    private String salt;
     private String mobile;
     private String email;
 
-    public User(String userId) {
-        this.userId = userId;
+    public User(String username) {
+        this.username = username;
     }
 }

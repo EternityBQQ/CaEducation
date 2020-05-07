@@ -11,4 +11,9 @@ public class ErrorMessage {
      * 保存失败
      */
     public static final String SAVE_FAILED = "保存失败";
+
+    /**
+     * 登录失败
+     */
+    public static final Integer LOGIN_FAILED = 302;
 }

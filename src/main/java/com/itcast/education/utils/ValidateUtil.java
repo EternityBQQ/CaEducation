@@ -10,7 +10,7 @@ import java.util.List;
 public class ValidateUtil {
 
     /**
-     * 校验对象是否为空
+     * 校验集合是否为空
      * @param validateList
      * @return
      */

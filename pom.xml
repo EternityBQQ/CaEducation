@@ -30,6 +30,15 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!--热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <!-- 这个需要为 true 热部署才有效 -->
+            <optional>true</optional>
+        </dependency>
+
         <!--Mybatis-->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -102,6 +111,11 @@
             <artifactId>lombok</artifactId>
             <version>1.16.10</version>
         </dependency>
+        <!--Redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -109,6 +123,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--开启热部署-->
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
             </plugin>
         </plugins>
     </build>
