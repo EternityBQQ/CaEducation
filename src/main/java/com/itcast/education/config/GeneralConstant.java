@@ -33,4 +33,5 @@ public class GeneralConstant {
     public static final String ERROR_PASSWORD = "密码错误";
     public static final String NOT_EXIST_USER = "用户不存在";
     public static final String LOGIN_FAILED = "登录失败，服务器故障！";
+    public static final String USER_TOKEN = "USER_TOKEN";
 }

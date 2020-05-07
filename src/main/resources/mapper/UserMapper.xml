@@ -6,6 +6,7 @@
         SELECT eu.user_id,
             eu.username,
             eu.password,
+            eu.real_password,
             eu.user_real_name,
             eu.salt,
             eu.mobile,
@@ -19,6 +20,7 @@
         <id column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="real_password" jdbcType="VARCHAR" property="realPassword"/>
         <result column="user_real_name" jdbcType="VARCHAR" property="userRealName"/>
         <result column="salt" javaType="VARCHAR" property="salt"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>

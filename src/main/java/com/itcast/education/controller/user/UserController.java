@@ -3,14 +3,10 @@ package com.itcast.education.controller.user;
 import com.itcast.education.config.ErrorMessage;
 import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.model.base.ResponseModel;
-import com.itcast.education.model.user.User;
 import com.itcast.education.service.UserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,12 +30,19 @@ public class UserController {
     })
     @GetMapping("/login")
     public ResponseModel login(@RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
-        // 登录逻辑校验
         try {
+            // 登录逻辑校验
             ResponseModel responseModel = userService.userLogin(username, password, request, response);
             return responseModel;
         } catch (Exception e) {
             return ResponseModel.build(ErrorMessage.LOGIN_FAILED, GeneralConstant.LOGIN_FAILED);
         }
+    }
+
+    @PostMapping("/loginOut")
+    public ResponseModel loginOut(HttpServletRequest request) {
+        String token = request.getHeader(GeneralConstant.USER_TOKEN);
+        ResponseModel responseModel = userService.loginOut(token);
+        return responseModel;
     }
 }

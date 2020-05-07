@@ -17,4 +17,11 @@ public interface UserService {
      * @return 统一结果集
      */
     ResponseModel userLogin(String username, String password, HttpServletRequest request, HttpServletResponse response);
+
+    /**
+     * 登出
+     * @param token
+     * @return
+     */
+    ResponseModel loginOut(String token);
 }
