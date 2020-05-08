@@ -53,8 +53,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseModel loginOut(String token) {
         // 清除Token
-        redisUtil.deleteCache(token);
-        return ResponseModel.ok();
+        if (!StringUtils.isEmpty(token)) {
+            redisUtil.deleteCache(token);
+            return ResponseModel.ok();
+        }
+        return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
     }
 
     @Override

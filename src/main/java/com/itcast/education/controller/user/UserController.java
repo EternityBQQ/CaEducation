@@ -45,13 +45,21 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "退出登录", authorizations = {@Authorization(value = "token")})
     @DeleteMapping("/loginOut")
     public ResponseModel loginOut(HttpServletRequest request) {
         String token = request.getHeader(GeneralConstant.USER_TOKEN);
-        ResponseModel responseModel = userService.loginOut(token);
-        return responseModel;
+        try {
+            LOG.info("登出token", token);
+            ResponseModel responseModel = userService.loginOut(token);
+            return responseModel;
+        } catch (Exception e) {
+            LOG.info("登出失败", token);
+            return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
+        }
     }
 
+    @ApiOperation(value = "注册", authorizations = {@Authorization(value = "token")})
     @PutMapping("/register")
     public ResponseModel registerUser(UserDto userDto) {
         User user = (User) CommonUtil.convertDto2Entity(userDto, User.class);
