@@ -12,4 +12,11 @@ public interface UserMapper {
      * @return
      */
     User findUser(User user);
+
+    /**
+     * 保存用户信息
+     * @param user
+     * @return
+     */
+    Integer saveUser(User user);
 }

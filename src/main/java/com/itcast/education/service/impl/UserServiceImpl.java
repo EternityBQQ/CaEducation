@@ -11,10 +11,12 @@ import com.itcast.education.utils.LoginUtil;
 import com.itcast.education.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -53,5 +55,37 @@ public class UserServiceImpl implements UserService {
         // 清除Token
         redisUtil.deleteCache(token);
         return ResponseModel.ok();
+    }
+
+    @Override
+    public boolean saveOrUpdateUser(User user) {
+        boolean flag = false;
+        if (user == null) {
+            return false;
+        }
+
+        String id = user.getUserId();
+        if (StringUtils.isEmpty(id)) {
+            // 封装前端未封装字段
+            String userId = UUID.randomUUID().toString().replaceAll("-", "");
+            user.setUserId(userId);
+            // 创建人和创建时间
+            user.setCreatePerson(user.getUserRealName());
+            user.setCreateTime(new Date());
+        } else {
+            // 修改人和修改时间
+            user.setUpdatePerson(user.getUserRealName());
+            user.setUpdateTime(new Date());
+        }
+        // 存储真实密码=>因为接下来会加密密码,因此在加密前先存储真实密码
+        user.setRealPassword(user.getPassword());
+        // 加密密码和盐
+        LoginUtil.encryptionPassword(user);
+
+        Integer rows = userMapper.saveUser(user);
+        if (rows > 0) {
+            flag = true;
+        }
+        return flag;
     }
 }

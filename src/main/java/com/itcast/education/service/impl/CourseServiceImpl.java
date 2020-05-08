@@ -3,12 +3,9 @@ package com.itcast.education.service.impl;
 import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.mapper.CourseMapper;
 import com.itcast.education.model.course.Course;
-import com.itcast.education.model.user.User;
 import com.itcast.education.service.CourseService;
-import com.itcast.education.utils.RedisUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.itcast.education.utils.CommonUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,9 +16,6 @@ import java.util.UUID;
 public class CourseServiceImpl implements CourseService {
     @Resource
     private CourseMapper courseMapper;
-
-    @Autowired
-    private RedisUtil redisUtil;
 
     @Override
     public List<Course> queryCourses(Integer courseLimitNumber) {
@@ -37,24 +31,20 @@ public class CourseServiceImpl implements CourseService {
         Course isExistCourse = validateIsExist(courseName);
 
         // 根据Token获取登录用户=>从Redis中获取
-        User userCache = (User) redisUtil.getByKey(token);
-        String personRealName = GeneralConstant.COMMON_PERSON;
-        if (userCache != null && !StringUtils.isEmpty(userCache.getUserRealName())) {
-            personRealName = userCache.getUserRealName();
-        }
+        String userRealName = CommonUtil.getLoginUsernameByToken(token);
         Integer rows = 0;
         if (isExistCourse == null) {
             // 封装ID
             course.setCourseId(UUID.randomUUID().toString().replace("-", ""));
             // 封装创建人和创建时间
-            course.setCreatePerson(personRealName);
+            course.setCreatePerson(userRealName);
             course.setCreateTime(new Date());
             // 添加课程信息
             rows = courseMapper.addCourse(course);
         } else {
             course.setCourseId(isExistCourse.getCourseId());
             // 封装操作人和操作时间
-            course.setUpdatePerson(personRealName);
+            course.setUpdatePerson(userRealName);
             course.setUpdateTime(new Date());
             // 更新课程信息
             rows = courseMapper.updateCourse(course);

@@ -24,4 +24,11 @@ public interface UserService {
      * @return
      */
     ResponseModel loginOut(String token);
+
+    /**
+     * 注册
+     * @return
+     * @param user
+     */
+    boolean saveOrUpdateUser(User user);
 }

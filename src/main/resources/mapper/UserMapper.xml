@@ -37,4 +37,30 @@
             </if>
         </where>
     </select>
+
+    <!--保存用户信息-->
+    <insert id="saveUser" parameterType="com.itcast.education.model.user.User">
+        INSERT INTO `ca_education`.`education_user` (
+            `user_id`,
+            `username`,
+            `password`,
+            `real_password`,
+            `user_real_name`,
+            `salt`,
+            `mobile`,
+            `email`,
+            `create_time`,
+            `create_person` )
+        VALUES (
+            #{userId},
+            #{username},
+            #{password},
+            #{realPassword},
+            #{userRealName},
+            #{salt},
+            #{mobile},
+            #{email},
+            #{createTime},
+            #{createPerson} )
+    </insert>
 </mapper>

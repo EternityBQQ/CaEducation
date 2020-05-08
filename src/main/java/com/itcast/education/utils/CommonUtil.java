@@ -1,7 +1,11 @@
 package com.itcast.education.utils;
 
+import com.itcast.education.config.GeneralConstant;
+import com.itcast.education.model.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 
@@ -12,6 +16,9 @@ import java.lang.reflect.Method;
  */
 public class CommonUtil {
     private static Logger LOG = LoggerFactory.getLogger(CommonUtil.class);
+
+    @Autowired
+    private static RedisUtil redisUtil;
 
     /**
      * DTO转实体
@@ -54,5 +61,20 @@ public class CommonUtil {
             LOG.error("[CommonUtil] [convertDto2Entity] 出现异常：", e);
         }
         return result;
+    }
+
+    /**
+     * 根据Token获取登录用户真实名称
+     * @param token
+     * @return
+     */
+    public static String getLoginUsernameByToken(String token) {
+        // 根据Token获取登录用户=>从Redis中获取
+        User userCache = (User) redisUtil.getByKey(token);
+        String personRealName = GeneralConstant.COMMON_PERSON;
+        if (userCache != null && !StringUtils.isEmpty(userCache.getUserRealName())) {
+            personRealName = userCache.getUserRealName();
+        }
+        return personRealName;
     }
 }
