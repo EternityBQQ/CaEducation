@@ -33,7 +33,10 @@
         <include refid="baseSelect"/>
         <where>
             <if test="userId != null and userId != ''">
-                user_id = #{userId}
+                AND user_id = #{userId}
+            </if>
+            <if test="username != null and username != ''">
+                AND username = #{username}
             </if>
         </where>
     </select>

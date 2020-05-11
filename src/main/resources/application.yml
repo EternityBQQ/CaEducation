@@ -64,3 +64,7 @@ swagger:
 logging:
   file:
     path: C:/MyFile/Java/workspace/log
+  level:
+    com:
+      acong:
+        dao: debug

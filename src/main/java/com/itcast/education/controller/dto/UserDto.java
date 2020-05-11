@@ -12,8 +12,6 @@ import lombok.Data;
 @ApiModel(value = "用户信息")
 @Data
 public class UserDto {
-    @ApiModelProperty("用户ID")
-    private String userId;
     @ApiModelProperty("用户名")
     private String username;
     @ApiModelProperty("密码")

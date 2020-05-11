@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         // 2.生成TOKEN
         String token = UUID.randomUUID().toString();
         // 3.把用户信息写入Redis->持久化user对象,设置session的过期时间
-        redisUtil.set(token, user);
+        redisUtil.set(GeneralConstant.USER_TOKEN + ":" + token, user);
         // 4.清除账号和盐密码,避免泄露
         user.setPassword(null);
         user.setSalt(null);
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     public ResponseModel loginOut(String token) {
         // 清除Token
         if (!StringUtils.isEmpty(token)) {
-            redisUtil.deleteCache(token);
+            redisUtil.deleteCache(GeneralConstant.USER_TOKEN + ":" + token);
             return ResponseModel.ok();
         }
         return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
@@ -88,6 +88,8 @@ public class UserServiceImpl implements UserService {
         Integer rows = userMapper.saveUser(user);
         if (rows > 0) {
             flag = true;
+            // 因为传过来的参数还需要设置,因此不能使用注解直接存入缓存,需要手动设置存到缓存
+            redisUtil.set(GeneralConstant.USER, user, 3600 * 5);
         }
         return flag;
     }

@@ -35,4 +35,5 @@ public class GeneralConstant {
     public static final String LOGIN_FAILED = "登录失败，服务器故障！";
     public static final String USER_TOKEN = "token";
     public static final String PROGRESS_SERVLET = "服务器故障";
+    public static final String USER = "user";
 }
