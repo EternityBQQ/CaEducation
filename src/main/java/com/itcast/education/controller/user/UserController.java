@@ -50,11 +50,11 @@ public class UserController {
     public ResponseModel loginOut(HttpServletRequest request) {
         String token = request.getHeader(GeneralConstant.USER_TOKEN);
         try {
-            LOG.info("登出token", token);
+            LOG.info("登出token: " + token);
             ResponseModel responseModel = userService.loginOut(token);
             return responseModel;
         } catch (Exception e) {
-            LOG.info("登出失败", token);
+            LOG.info("登出失败: " + token);
             return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
         }
     }
@@ -65,7 +65,7 @@ public class UserController {
         User user = (User) CommonUtil.convertDto2Entity(userDto, User.class);
         boolean result = userService.saveOrUpdateUser(user);
         if (result) {
-            LOG.info("注册成功", user);
+            LOG.info("注册成功: " + user);
             return ResponseModel.ok();
         } else {
             LOG.error("注册失败");
