@@ -11,6 +11,7 @@ import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.TagService;
 import com.itcast.education.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +29,7 @@ public class MediaOutputServiceImpl implements MediaOutputService {
     @Autowired
     private TagService tagService;
 
+    @Cacheable(cacheNames = "homePageData")
     @Override
     public HomePageDto queryHomePageData(Integer carouseSize, Integer categorySize) {
         // 轮播图

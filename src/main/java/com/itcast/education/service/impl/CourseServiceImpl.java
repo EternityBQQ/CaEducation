@@ -5,6 +5,7 @@ import com.itcast.education.mapper.CourseMapper;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.utils.CommonUtil;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
