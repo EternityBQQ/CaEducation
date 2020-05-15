@@ -5,6 +5,7 @@ import com.itcast.education.mapper.CourseMapper;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.utils.CommonUtil;
+import com.itcast.education.utils.ValidateUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +66,7 @@ public class CourseServiceImpl implements CourseService {
         Course course = Course.builder().build();
         course.setCourseName(courseName);
         List<Course> courses = courseMapper.queryCourses(GeneralConstant.COURSE_LIMIT_NUMBER, course);
-        if (courses != null && !courses.isEmpty()) {
+        if (ValidateUtil.listIsEmpty(courses)) {
             return courses.get(0);
         }
         return null;

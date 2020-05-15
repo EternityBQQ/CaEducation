@@ -1,5 +1,7 @@
 package com.itcast.education.config;
 
+import java.math.BigInteger;
+
 /**
  * 通用常量
  * @author zheng.zhang
@@ -36,4 +38,8 @@ public class GeneralConstant {
     public static final String USER_TOKEN = "token";
     public static final String PROGRESS_SERVLET = "服务器故障";
     public static final String USER = "user";
+
+    // 发帖
+    public static final String SEND_FAILED = "发帖失败";
+    public static final Integer ZERO = 0;
 }

@@ -5,7 +5,7 @@
         SELECT ep.post_id,
             ep.post_title,
             ep.post_content,
-            ep.post_pageviews,
+            ep.post_page_views,
             ep.post_likes,
             ep.user_id,
             ep.media_ids,

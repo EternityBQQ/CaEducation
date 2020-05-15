@@ -1,6 +1,9 @@
 package com.itcast.education.controller.community;
 
+import com.itcast.education.config.ErrorMessage;
+import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.controller.dto.CommunityPageDto;
+import com.itcast.education.controller.dto.PostDto;
 import com.itcast.education.model.base.ResponseModel;
 import com.itcast.education.service.CommunityService;
 import io.swagger.annotations.Api;
@@ -12,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zheng.zhang
@@ -32,5 +37,21 @@ public class CommunityController {
         CommunityPageDto pageDto = communityService.getCommunityPageData(pageDataSize);
         LOG.info("社区数据获取成功", pageDto);
         return ResponseModel.ok(pageDto);
+    }
+
+    @ApiOperation(value = "发表帖子", notes = "帖子信息", authorizations = {@Authorization(value = "token")})
+    @GetMapping(value = "/sendArticle")
+    public ResponseModel sendArticle(PostDto postDto, HttpServletRequest request) {
+        try {
+            String token = request.getHeader(GeneralConstant.USER_TOKEN);
+            boolean flag = communityService.sendOrUpdateArticle(postDto, token);
+            if (flag) {
+                return ResponseModel.ok();
+            } else {
+                return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.SEND_FAILED);
+            }
+        } catch (Exception e) {
+            return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
+        }
     }
 }
