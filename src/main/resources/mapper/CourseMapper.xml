@@ -23,16 +23,14 @@
         <result column="course_url" jdbcType="VARCHAR" property="courseUrl"/>
     </resultMap>
     <!--列表查询-->
-    <select id="queryCourses" resultMap="baseMap">
+    <select id="queryCourses" parameterType="com.itcast.education.model.course.Course" resultMap="baseMap">
         <include refid="baseSelect"/>
         <where>
-            <if test="course != null">
-                <if test="course.courseId != null and course.courseId != ''">
-                    ec.course_id = #{course.courseId}
-                </if>
-                <if test="course.courseName != null and course.courseName != ''">
-                    ec.course_name = #{course.courseName}
-                </if>
+            <if test="courseId != null and courseId != ''">
+                ec.course_id = #{courseId}
+            </if>
+            <if test="courseName != null and courseName != ''">
+                ec.course_name = #{courseName}
             </if>
         </where>
         <if test="courseLimitNumber > 0">

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.education.mapper.CommentMapper">
+    <sql id="baseQuery">
+        SELECT ec.comment_id,
+            ec.comment_content,
+            ec.comment_user_id,
+            ec.reply_user_ids,
+            ec.media_ids,
+            ec.post_id,
+            ec.likes,
+            ec.create_time,
+            ec.create_person,
+            ec.update_time,
+            ec.update_person
+        FROM `ca_education`.`education_comment` ec
+    </sql>
+
+    <!--列表-->
+    <select id="find" resultType="com.itcast.education.model.community.Comment">
+        <include refid="baseQuery"/>
+        <where>
+            <if test="commentId != null and commentId != ''">
+                AND ec.comment_id = #{comment_id}
+            </if>
+            <if test="postId != null and postId != ''">
+                AND ec.post_id = #{postId}
+            </if>
+        </where>
+    </select>
+</mapper>

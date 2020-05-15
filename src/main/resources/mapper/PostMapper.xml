@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.education.mapper.PostMapper">
+    <sql id="baseQuery">
+        SELECT ep.post_id,
+            ep.post_title,
+            ep.post_content,
+            ep.post_pageviews,
+            ep.post_likes,
+            ep.user_id,
+            ep.media_ids,
+            ep.tags,
+            ep.create_time,
+            ep.create_person,
+            ep.update_time,
+            ep.update_person
+        FROM `ca_education`.`education_post` ep
+    </sql>
+
+    <!--列表-->
+    <select id="find" resultType="com.itcast.education.model.community.Post">
+        <include refid="baseQuery" />
+        <where>
+            <if test="postId != null and postId != ''">
+                AND ep.post_id = #{postId}
+            </if>
+        </where>
+    </select>
+</mapper>
