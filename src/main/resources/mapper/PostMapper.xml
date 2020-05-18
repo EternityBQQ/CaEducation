@@ -16,6 +16,14 @@
             ep.update_person
         FROM `ca_education`.`education_post` ep
     </sql>
+    <!--新增-->
+    <insert id="save">
+
+    </insert>
+    <!--修改-->
+    <update id="update">
+
+    </update>
 
     <!--列表-->
     <select id="find" resultType="com.itcast.education.model.community.Post">

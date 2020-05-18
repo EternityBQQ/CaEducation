@@ -9,4 +9,8 @@ import java.util.List;
 public interface PostMapper {
 
     List<Post> find(Post post);
+
+    boolean save(Post post);
+
+    boolean update(Post post);
 }

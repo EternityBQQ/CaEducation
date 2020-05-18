@@ -57,6 +57,8 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Override
     public boolean sendOrUpdateArticle(PostDto postDto, String token) {
+        boolean result;
+
         Post post = (Post) CommonUtil.convertDto2Entity(postDto, Post.class);
         Post isExistPost = validateIsExist(post);
         String userRealName = CommonUtil.getLoginUsernameByToken(token);
@@ -72,8 +74,8 @@ public class CommunityServiceImpl implements CommunityService {
             // 创建人和更新时间
             post.setCreateTime(new Date());
             post.setCreatePerson(userRealName);
+            result = postMapper.save(post);
         } else {
-            post.setPostId(isExistPost.getPostId());
             // 浏览量为0
             post.setPostPageViews(isExistPost.getPostPageViews());
             // 点赞量为0
@@ -81,8 +83,9 @@ public class CommunityServiceImpl implements CommunityService {
             // 设置更新人和更新时间
             post.setUpdatePerson(userRealName);
             post.setUpdateTime(new Date());
+            result = postMapper.update(post);
         }
-        return false;
+        return result;
     }
 
     /**

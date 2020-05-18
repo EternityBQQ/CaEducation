@@ -1,6 +1,7 @@
 package com.itcast.education.model.community;
 
 import com.itcast.education.model.base.BaseModel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Post extends BaseModel<Post> {
     private String postId;
     private String postTitle;
