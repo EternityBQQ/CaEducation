@@ -5,6 +5,7 @@ import com.itcast.education.model.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
@@ -14,11 +15,12 @@ import java.lang.reflect.Method;
  * @description 公共工具类
  * @date 2020/4/27 17:01
  */
+@Component
 public class CommonUtil {
     private static Logger LOG = LoggerFactory.getLogger(CommonUtil.class);
 
     @Autowired
-    private static RedisUtil redisUtil;
+    private RedisUtil redisUtil;
 
     /**
      * DTO转实体
@@ -68,12 +70,16 @@ public class CommonUtil {
      * @param token
      * @return
      */
-    public static String getLoginUsernameByToken(String token) {
-        // 根据Token获取登录用户=>从Redis中获取
-        User userCache = (User) redisUtil.getByKey(token);
-        String personRealName = GeneralConstant.COMMON_PERSON;
-        if (userCache != null && !StringUtils.isEmpty(userCache.getUserRealName())) {
-            personRealName = userCache.getUserRealName();
+    public String getLoginUsernameByToken(String token) {
+        String personRealName = GeneralConstant.COMMON_PERSON;;
+        try {
+            // 根据Token获取登录用户=>从Redis中获取
+            User userCache = (User) redisUtil.getByKey(token);
+            if (userCache != null && !StringUtils.isEmpty(userCache.getUserRealName())) {
+                personRealName = userCache.getUserRealName();
+            }
+        } catch (Exception e) {
+            LOG.error("[CommonUtil] [getLoginUsernameByToken] has error", e);
         }
         return personRealName;
     }

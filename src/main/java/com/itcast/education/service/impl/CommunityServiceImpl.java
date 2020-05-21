@@ -10,8 +10,10 @@ import com.itcast.education.model.community.Post;
 import com.itcast.education.service.CommunityService;
 import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.ValidateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.math.BigInteger;
@@ -30,6 +32,9 @@ public class CommunityServiceImpl implements CommunityService {
     private CommentMapper commentMapper;
     @Resource
     private PostMapper postMapper;
+
+    @Autowired
+    private CommonUtil commonUtil;
 
     @Cacheable(cacheNames = "communityPageData")
     @Override
@@ -61,7 +66,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         Post post = (Post) CommonUtil.convertDto2Entity(postDto, Post.class);
         Post isExistPost = validateIsExist(post);
-        String userRealName = CommonUtil.getLoginUsernameByToken(token);
+        String userRealName = commonUtil.getLoginUsernameByToken(token);
         // 设置未封装的字段
         if (isExistPost == null) {
             post.getPostId();
@@ -76,6 +81,7 @@ public class CommunityServiceImpl implements CommunityService {
             post.setCreatePerson(userRealName);
             result = postMapper.save(post);
         } else {
+            post.setPostId(isExistPost.getPostId());
             // 浏览量为0
             post.setPostPageViews(isExistPost.getPostPageViews());
             // 点赞量为0
@@ -94,9 +100,12 @@ public class CommunityServiceImpl implements CommunityService {
      * @return
      */
     private Post validateIsExist(Post post) {
-        List<Post> posts = postMapper.find(post);
-        if (ValidateUtil.listIsEmpty(posts)) {
-            return posts.get(0);
+        // 校验是否存在postId
+        if (post != null && !StringUtils.isEmpty(post.getPostId())) {
+            List<Post> posts = postMapper.find(post);
+            if (!ValidateUtil.listIsEmpty(posts)) {
+                return posts.get(0);
+            }
         }
         return null;
     }

@@ -6,6 +6,7 @@ import com.itcast.education.model.course.Course;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.ValidateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ import java.util.UUID;
 public class CourseServiceImpl implements CourseService {
     @Resource
     private CourseMapper courseMapper;
+
+    @Autowired
+    private CommonUtil commonUtil;
 
     @Override
     public List<Course> queryCourses(Integer courseLimitNumber) {
@@ -33,7 +37,7 @@ public class CourseServiceImpl implements CourseService {
         Course isExistCourse = validateIsExist(courseName);
 
         // 根据Token获取登录用户=>从Redis中获取
-        String userRealName = CommonUtil.getLoginUsernameByToken(token);
+        String userRealName = commonUtil.getLoginUsernameByToken(token);
         Integer rows = 0;
         if (isExistCourse == null) {
             // 封装ID

@@ -11,6 +11,7 @@ public class PostDto {
     private String postTitle;
     private String postContent;
     private String userId;
+    private List<Integer> mediaIds;
     private List<Integer> tags;
 
     public String getPostTitle() {
@@ -35,6 +36,14 @@ public class PostDto {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getMediaIds() {
+        return mediaIds.toString();
+    }
+
+    public void setMediaIds(List<Integer> mediaIds) {
+        this.mediaIds = mediaIds;
     }
 
     public String getTags() {

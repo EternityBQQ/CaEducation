@@ -17,12 +17,44 @@
         FROM `ca_education`.`education_post` ep
     </sql>
     <!--新增-->
-    <insert id="save">
-
+    <insert id="save" parameterType="com.itcast.education.model.community.Post">
+        INSERT INTO `ca_education`.`education_post` (
+            `post_id`,
+            `post_title`,
+            `post_content`,
+            `post_page_views`,
+            `post_likes`,
+            `user_id`,
+            `media_ids`,
+            `tags`,
+            `create_time`,
+            `create_person`)
+        VALUES (
+	        #{postId},
+	        #{postTitle},
+	        #{postContent},
+	        #{postPageViews},
+	        #{postLikes},
+	        #{userId},
+	        #{mediaIds},
+	        #{tags},
+	        #{createTime},
+	        #{createPerson} )
     </insert>
     <!--修改-->
-    <update id="update">
-
+    <update id="update" parameterType="com.itcast.education.model.community.Post">
+        UPDATE `ca_education`.`education_post`
+        SET `post_title` = #{postTitle},
+            `post_content` = #{postContent},
+            `post_page_views` = #{postPageViews},
+            `post_likes` = #{postLikes},
+            `user_id` = #{userId},
+            `media_ids` = #{mediaIds},
+            `tags` = #{tags},
+            `update_time` = #{updateTime},
+            `update_person` = #{updatePerson}
+        WHERE
+            `post_id` = #{postId}
     </update>
 
     <!--列表-->

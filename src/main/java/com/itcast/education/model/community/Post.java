@@ -25,6 +25,7 @@ public class Post extends BaseModel<Post> {
     private BigInteger postPageViews;
     private BigInteger postLikes;
     private String userId;
+    private String mediaIds;
     private String tags;
 
     private List<Comment> comments;
