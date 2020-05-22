@@ -1,56 +1,25 @@
 package com.itcast.education.controller.dto;
 
-import java.util.List;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @author zheng.zhang
  * @description 发帖DTO
  * @date 2020/5/15 16:19
  */
+@Data
+@ApiModel(value = "帖子DTO信息")
 public class PostDto {
+    @ApiModelProperty(value = "帖子标题")
     private String postTitle;
+    @ApiModelProperty(value = "帖子内容")
     private String postContent;
+    @ApiModelProperty(value = "用户ID")
     private String userId;
-    private List<Integer> mediaIds;
-    private List<Integer> tags;
-
-    public String getPostTitle() {
-        return postTitle;
-    }
-
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
-
-    public String getPostContent() {
-        return postContent;
-    }
-
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getMediaIds() {
-        return mediaIds.toString();
-    }
-
-    public void setMediaIds(List<Integer> mediaIds) {
-        this.mediaIds = mediaIds;
-    }
-
-    public String getTags() {
-        return tags.toString();
-    }
-
-    public void setTags(List<Integer> tags) {
-        this.tags = tags;
-    }
+    @ApiModelProperty(value = "媒体数据URL")
+    private String mediaIds;
+    @ApiModelProperty(value = "标签ID")
+    private String tags;
 }

@@ -4,17 +4,16 @@ import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.controller.dto.HomePageDto;
 import com.itcast.education.mapper.MediaOutputMapper;
 import com.itcast.education.model.course.Course;
-import com.itcast.education.model.course.Tag;
 import com.itcast.education.model.media.MediaOutput;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.TagService;
-import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.JsonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -68,6 +67,21 @@ public class MediaOutputServiceImpl implements MediaOutputService {
         return result;
     }
 
+    @Override
+    public MediaOutput findByUrl(String url) {
+        if (StringUtils.isEmpty(url)) {
+            return null;
+        }
+        MediaOutput findMedia = new MediaOutput();
+        findMedia.setUrl(url);
+        List<MediaOutput> outputs = mediaOutputMapper.find(findMedia);
+        if (!ValidateUtil.listIsEmpty(outputs)) {
+            return outputs.get(0);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * 将媒体数据集合转换为图片数据集
      * @param carouselList 轮播图
@@ -103,18 +117,12 @@ public class MediaOutputServiceImpl implements MediaOutputService {
             courseObj.put(GeneralConstant.SALE_AMOUNT, course.getSaleCourse());
             courseObj.put(GeneralConstant.IMG_URL, course.getCourseUrl());
             List<Integer> tagIds = (List<Integer>) JsonUtil.strToPojo(course.getTags(), List.class);
-            List<String> tags = new ArrayList<>();
-            for (Integer id : tagIds) {
-                // 通过Id获取标签对象
-                Tag tag = tagService.find(new Tag(id));
-                if (tag != null) {
-                    String tagName = tag.getTagName();
-                    tags.add(tagName);
-                }
-            }
+            List<String> tags = tagService.getTagNames(tagIds);
             courseObj.put(GeneralConstant.TAGS, tags);
             homePageDto.getCourseList().add(courseObj);
         }
         return homePageDto;
     }
+
+
 }

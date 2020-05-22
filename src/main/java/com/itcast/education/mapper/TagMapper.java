@@ -3,6 +3,8 @@ package com.itcast.education.mapper;
 import com.itcast.education.model.course.Tag;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface TagMapper {
 
@@ -11,5 +13,5 @@ public interface TagMapper {
      * @param tag
      * @return
      */
-    Tag find(Tag tag);
+    List<Tag> find(Tag tag);
 }

@@ -25,7 +25,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> queryCourses(Integer courseLimitNumber) {
-        List<Course> courses = courseMapper.queryCourses(courseLimitNumber, null);
+        List<Course> courses = courseMapper.queryCourses(courseLimitNumber, new Course());
         return courses;
     }
 

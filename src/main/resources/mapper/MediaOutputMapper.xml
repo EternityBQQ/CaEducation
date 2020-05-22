@@ -51,6 +51,9 @@
             <if test="mediaId != null">
                 AND mo.media_id = #{mediaId}
             </if>
+            <if test="url != null and url != ''">
+                AND mo.url = #{url}
+            </if>
         </where>
     </select>
 </mapper>

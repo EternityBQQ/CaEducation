@@ -7,13 +7,17 @@ import com.itcast.education.mapper.CommentMapper;
 import com.itcast.education.mapper.PostMapper;
 import com.itcast.education.model.community.Comment;
 import com.itcast.education.model.community.Post;
+import com.itcast.education.model.media.MediaOutput;
 import com.itcast.education.model.user.User;
 import com.itcast.education.service.CommunityService;
 import com.itcast.education.service.MediaOutputService;
+import com.itcast.education.service.TagService;
 import com.itcast.education.service.UserService;
 import com.itcast.education.utils.CommonUtil;
+import com.itcast.education.utils.JsonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -37,6 +41,8 @@ public class CommunityServiceImpl implements CommunityService {
     private UserService userService;
     @Autowired
     private MediaOutputService mediaOutputService;
+    @Autowired
+    private TagService tagService;
 
     @Autowired
     private CommonUtil commonUtil;
@@ -91,20 +97,66 @@ public class CommunityServiceImpl implements CommunityService {
         pageDto.setHotPost(hotPostMap);
         //2. 设置论坛贴=>暂时设置为除开最新帖子之外的帖子
         posts.remove(posts.size() - 1);
-        List<Map<String, Object>> postsMap = new ArrayList<>();
-        // ============================
-        // 标题
-        // 内容
-        // 图片
-        // ============================
+        List<Map<String, Object>> postsMap = getOriginalPost(posts);
         pageDto.setPosts(postsMap);
         return pageDto;
     }
 
+    /**
+     * 设置其他帖子
+     * @param posts 帖子集合实例
+     * @return 其他帖子集合对象
+     */
+    private List<Map<String, Object>> getOriginalPost(List<Post> posts) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        // ============================
+        if (!ValidateUtil.listIsEmpty(posts)) {
+            for (Post post: posts) {
+                Map<String, Object> postMap = new HashMap<>();
+                // 标题
+                postMap.put(GeneralConstant.TITLE, post.getPostTitle());
+                // 内容
+                postMap.put(GeneralConstant.POST_CONTENT, post.getPostContent());
+                // 图片
+                String mediaIds = post.getMediaIds();
+                List<Integer> ids = (List<Integer>) JsonUtil.strToPojo(mediaIds, List.class);
+                String mediaUrl = GeneralConstant.EMPTY;
+                if (!ValidateUtil.listIsEmpty(ids)) {
+                    MediaOutput media = mediaOutputService.findMediaById(ids.get(0));
+                    mediaUrl = media.getUrl();
+                }
+                postMap.put(GeneralConstant.IMG_URL, mediaUrl);
+                // 标签
+                String tags = post.getTags();
+                List<Integer> tagsList = (List<Integer>) JsonUtil.strToPojo(tags, List.class);
+                List<String> tagNames = tagService.getTagNames(tagsList);
+                postMap.put(GeneralConstant.TAGS, tagNames);
+                result.add(postMap);
+            }
+        }
+        // ============================
+        return result;
+    }
+
+    @CachePut(cacheNames = "communityPageData", key = "#postDto.userId")
     @Override
     public boolean sendOrUpdateArticle(PostDto postDto, String token) {
         boolean result;
-
+        // 通过URL找到ID
+        if (postDto == null) {
+            return false;
+        }
+        List<String> urlList = (List<String>) JsonUtil.strToPojo(postDto.getMediaIds(), List.class);
+        List<Integer> ids = new ArrayList<>();
+        if (!ValidateUtil.listIsEmpty(urlList)) {
+            for (String url : urlList) {
+                MediaOutput mediaOutput = mediaOutputService.findByUrl(url);
+                if (mediaOutput != null) {
+                    ids.add(mediaOutput.getMediaId());
+                }
+            }
+        }
+        postDto.setMediaIds(ids.toString());
         Post post = (Post) CommonUtil.convertDto2Entity(postDto, Post.class);
         Post isExistPost = validateIsExist(post);
         String userRealName = commonUtil.getLoginUsernameByToken(token);

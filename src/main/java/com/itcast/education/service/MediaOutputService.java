@@ -27,4 +27,11 @@ public interface MediaOutputService {
      * @return
      */
     List<String> findByIds(String mediaIds);
+
+    /**
+     * 根据URL查找媒体数据对象
+     * @param url
+     * @return
+     */
+    MediaOutput findByUrl(String url);
 }
