@@ -12,6 +12,7 @@ public class User extends BaseModel<User> {
     private String password;
     private String realPassword;
     private String userRealName;
+    private Integer iconMediaId;
     private String salt;
     private String mobile;
     private String email;

@@ -4,7 +4,9 @@ import com.itcast.education.config.ErrorMessage;
 import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.mapper.UserMapper;
 import com.itcast.education.model.base.ResponseModel;
+import com.itcast.education.model.media.MediaOutput;
 import com.itcast.education.model.user.User;
+import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.UserService;
 import com.itcast.education.utils.CookieUtil;
 import com.itcast.education.utils.LoginUtil;
@@ -25,6 +27,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private MediaOutputService mediaOutputService;
 
     @Override
     public ResponseModel userLogin(String username, String password, HttpServletRequest request, HttpServletResponse response) {
@@ -92,5 +96,25 @@ public class UserServiceImpl implements UserService {
             redisUtil.set(GeneralConstant.USER, user, 3600 * 5);
         }
         return flag;
+    }
+
+    @Override
+    public User findUser(String userId) {
+        User findUser = new User();
+        findUser.setUserId(userId);
+        return userMapper.findUser(findUser);
+    }
+
+    @Override
+    public String findHeadIcon(String userId) {
+        User user = findUser(userId);
+        Integer iconMediaId = user.getIconMediaId();
+        // 根据媒体ID获取图片信息
+        MediaOutput mediaOutput = mediaOutputService.findMediaById(iconMediaId);
+        String result = GeneralConstant.EMPTY;
+        if (mediaOutput != null) {
+            result = mediaOutput.getUrl();
+        }
+        return result;
     }
 }

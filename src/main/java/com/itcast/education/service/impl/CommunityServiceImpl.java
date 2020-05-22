@@ -7,7 +7,9 @@ import com.itcast.education.mapper.CommentMapper;
 import com.itcast.education.mapper.PostMapper;
 import com.itcast.education.model.community.Comment;
 import com.itcast.education.model.community.Post;
+import com.itcast.education.model.user.User;
 import com.itcast.education.service.CommunityService;
+import com.itcast.education.service.UserService;
 import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author zheng.zhang
@@ -32,6 +32,8 @@ public class CommunityServiceImpl implements CommunityService {
     private CommentMapper commentMapper;
     @Resource
     private PostMapper postMapper;
+    @Resource
+    private UserService userService;
 
     @Autowired
     private CommonUtil commonUtil;
@@ -52,12 +54,41 @@ public class CommunityServiceImpl implements CommunityService {
             List<Comment> comments = commentMapper.find(new Comment(postId));
             post.setComments(comments);
         }
-        // 设置热帖=>标题贴暂时设置为最新数据
-        Post hotPost = posts.get(posts.size());
-        // 设置论坛贴=>暂时设置为除开最新帖子之外的帖子
-        posts.remove(posts.size());
-        pageData = new CommunityPageDto(hotPost, posts);
+        pageData = convertPageData(posts);
         return pageData;
+    }
+
+    /**
+     * 封装社区交流版块页面数据
+     * @param posts
+     * @return
+     */
+    private CommunityPageDto convertPageData(List<Post> posts) {
+        CommunityPageDto pageDto = new CommunityPageDto();
+        //1. 设置热帖=>标题贴暂时设置为最新数据
+        Post hotPost = posts.get(posts.size() - 1);
+        // 用户信息
+        Map<String, Object> hotPostMap = new HashMap<>();
+        // 用户实体信息
+        User user = userService.findUser(hotPost.getUserId());
+        // 根据用户实体查到头像
+        String headIcon = userService.findHeadIcon(hotPost.getUserId());
+        // 头像
+        hotPostMap.put(GeneralConstant.HEAD_ICON, headIcon);
+        // 名称
+        hotPostMap.put(GeneralConstant.USERNAME, user.getUserRealName());
+        // 发帖时间
+        hotPostMap.put(GeneralConstant.PUBLIC_TIME, hotPost.getCreateTime().toString());
+        // 帖子内容
+        hotPostMap.put(GeneralConstant.POST_CONTENT, hotPost.getPostContent());
+        pageDto.setHotPost(hotPostMap);
+        //2. 设置论坛贴=>暂时设置为除开最新帖子之外的帖子
+        posts.remove(posts.size() - 1);
+        List<Map<String, Object>> postsMap = new ArrayList<>();
+        pageDto.setPosts(postsMap);
+        // ============================
+        // ============================
+        return pageDto;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.itcast.education.service;
 
 import com.itcast.education.controller.dto.HomePageDto;
+import com.itcast.education.model.media.MediaOutput;
 
 public interface MediaOutputService {
     /**
@@ -10,4 +11,11 @@ public interface MediaOutputService {
      * @return
      */
     HomePageDto queryHomePageData(Integer carouseSize, Integer categorySize);
+
+    /**
+     * 根据ID获取媒体数据
+     * @param iconMediaId
+     * @return
+     */
+    MediaOutput findMediaById(Integer iconMediaId);
 }

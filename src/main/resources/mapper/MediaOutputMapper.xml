@@ -36,11 +36,21 @@
         <include refid="baseSelect"/>
         <where>
             <if test="type != null">
-                mo.media_type = #{type}
+                AND mo.media_type = #{type}
             </if>
         </where>
         <if test="size > 0">
             LIMIT #{size}
         </if>
+    </select>
+
+    <!--条件查询媒体数据-->
+    <select id="find" resultType="com.itcast.education.model.media.MediaOutput">
+        <include refid="baseSelect" />
+        <where>
+            <if test="mediaId != null">
+                AND mo.media_id = #{mediaId}
+            </if>
+        </where>
     </select>
 </mapper>

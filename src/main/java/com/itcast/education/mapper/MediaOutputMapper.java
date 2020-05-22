@@ -14,4 +14,6 @@ public interface MediaOutputMapper {
      * @return
      */
     List<MediaOutput> queryMediaByType(String type, Integer size);
+
+    List<MediaOutput> find(MediaOutput findMediaOutput);
 }

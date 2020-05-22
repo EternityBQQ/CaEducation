@@ -1,11 +1,14 @@
 package com.itcast.education.controller.dto;
 
-import com.itcast.education.model.community.Post;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zheng.zhang
@@ -15,7 +18,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommunityPageDto {
-    private Post hotPost;
-    private List<Post> posts;
+@ApiModel(value = "社区页面数据")
+public class CommunityPageDto implements Serializable {
+    @ApiModelProperty(value = "热帖")
+    private Map<String, Object> hotPost;
+    @ApiModelProperty(value = "其他帖子")
+    private List<Map<String, Object>> posts;
 }

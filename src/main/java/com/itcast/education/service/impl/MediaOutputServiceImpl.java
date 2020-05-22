@@ -10,6 +10,7 @@ import com.itcast.education.service.CourseService;
 import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.TagService;
 import com.itcast.education.utils.JsonUtil;
+import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,18 @@ public class MediaOutputServiceImpl implements MediaOutputService {
         List<Course> courses = courseService.queryCourses(GeneralConstant.COURSE_LIMIT_NUMBER);
         HomePageDto homePageDto = convertPageData(carouselList, categoryIcons, courses);
         return homePageDto;
+    }
+
+    @Override
+    public MediaOutput findMediaById (Integer mediaId) {
+        MediaOutput findMediaOutput = new MediaOutput();
+        findMediaOutput.setMediaId(mediaId);
+        List<MediaOutput> mediaOutputs = mediaOutputMapper.find(findMediaOutput);
+        if (!ValidateUtil.listIsEmpty(mediaOutputs)) {
+            return mediaOutputs.get(0);
+        } else {
+            return null;
+        }
     }
 
     /**

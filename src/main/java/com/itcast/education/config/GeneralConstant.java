@@ -42,4 +42,11 @@ public class GeneralConstant {
     // 发帖
     public static final String SEND_FAILED = "发帖失败";
     public static final Integer ZERO = 0;
+
+    // CommunityPageDto
+    public static final String HEAD_ICON = "head_icon";
+    public static final String USERNAME = "username";
+    public static final String PUBLIC_TIME = "public_time";
+    public static final String EMPTY = "";
+    public static final String POST_CONTENT = "post_content";
 }

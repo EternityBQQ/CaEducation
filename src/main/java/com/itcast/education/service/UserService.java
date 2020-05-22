@@ -31,4 +31,18 @@ public interface UserService {
      * @param user
      */
     boolean saveOrUpdateUser(User user);
+
+    /**
+     * 根据用户ID查找用户信息
+     * @param userId
+     * @return
+     */
+    User findUser(String userId);
+
+    /**
+     * 查找用户头像
+     * @param userId
+     * @return
+     */
+    String findHeadIcon(String userId);
 }
