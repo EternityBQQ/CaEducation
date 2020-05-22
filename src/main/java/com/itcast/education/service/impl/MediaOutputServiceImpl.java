@@ -9,6 +9,7 @@ import com.itcast.education.model.media.MediaOutput;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.TagService;
+import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.JsonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MediaOutputServiceImpl implements MediaOutputService {
@@ -53,6 +51,21 @@ public class MediaOutputServiceImpl implements MediaOutputService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<String> findByIds(String mediaIds) {
+        List<String> result = new ArrayList<>();
+        List<Integer> mediaOutputIds = (List<Integer>) JsonUtil.strToPojo(mediaIds, List.class);
+        if (!ValidateUtil.listIsEmpty(mediaOutputIds)) {
+            for (int i = 0; i < mediaOutputIds.size(); i++) {
+                MediaOutput mediaOutput = findMediaById(mediaOutputIds.get(i));
+                if (mediaOutput != null) {
+                    result.add(mediaOutput.getUrl());
+                }
+            }
+        }
+        return result;
     }
 
     /**

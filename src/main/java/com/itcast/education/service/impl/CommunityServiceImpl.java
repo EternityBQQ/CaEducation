@@ -9,6 +9,7 @@ import com.itcast.education.model.community.Comment;
 import com.itcast.education.model.community.Post;
 import com.itcast.education.model.user.User;
 import com.itcast.education.service.CommunityService;
+import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.UserService;
 import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.ValidateUtil;
@@ -32,8 +33,10 @@ public class CommunityServiceImpl implements CommunityService {
     private CommentMapper commentMapper;
     @Resource
     private PostMapper postMapper;
-    @Resource
+    @Autowired
     private UserService userService;
+    @Autowired
+    private MediaOutputService mediaOutputService;
 
     @Autowired
     private CommonUtil commonUtil;
@@ -73,6 +76,8 @@ public class CommunityServiceImpl implements CommunityService {
         User user = userService.findUser(hotPost.getUserId());
         // 根据用户实体查到头像
         String headIcon = userService.findHeadIcon(hotPost.getUserId());
+        // 根据媒体数据ID查找媒体数据集合
+        List<String> imagesUrl = mediaOutputService.findByIds(hotPost.getMediaIds());
         // 头像
         hotPostMap.put(GeneralConstant.HEAD_ICON, headIcon);
         // 名称
@@ -81,13 +86,18 @@ public class CommunityServiceImpl implements CommunityService {
         hotPostMap.put(GeneralConstant.PUBLIC_TIME, hotPost.getCreateTime().toString());
         // 帖子内容
         hotPostMap.put(GeneralConstant.POST_CONTENT, hotPost.getPostContent());
+        // 帖子媒体图片
+        hotPostMap.put(GeneralConstant.POST_IMAGES, imagesUrl);
         pageDto.setHotPost(hotPostMap);
         //2. 设置论坛贴=>暂时设置为除开最新帖子之外的帖子
         posts.remove(posts.size() - 1);
         List<Map<String, Object>> postsMap = new ArrayList<>();
+        // ============================
+        // 标题
+        // 内容
+        // 图片
+        // ============================
         pageDto.setPosts(postsMap);
-        // ============================
-        // ============================
         return pageDto;
     }
 

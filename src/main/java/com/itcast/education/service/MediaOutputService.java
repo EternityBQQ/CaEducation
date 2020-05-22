@@ -3,6 +3,8 @@ package com.itcast.education.service;
 import com.itcast.education.controller.dto.HomePageDto;
 import com.itcast.education.model.media.MediaOutput;
 
+import java.util.List;
+
 public interface MediaOutputService {
     /**
      * 根据类型获取媒体数据类型
@@ -18,4 +20,11 @@ public interface MediaOutputService {
      * @return
      */
     MediaOutput findMediaById(Integer iconMediaId);
+
+    /**
+     * 根据ID集合查找媒体数据
+     * @param mediaIds
+     * @return
+     */
+    List<String> findByIds(String mediaIds);
 }
