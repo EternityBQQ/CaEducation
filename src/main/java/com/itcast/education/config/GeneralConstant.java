@@ -50,4 +50,5 @@ public class GeneralConstant {
     public static final String EMPTY = "";
     public static final String POST_CONTENT = "post_content";
     public static final String POST_IMAGES = "post_images";
+    public static final String COMMUNITY_PAGE_DATA = "community_page_data";
 }

@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author zheng.zhang
  * @description 发帖DTO
@@ -19,7 +21,7 @@ public class PostDto {
     @ApiModelProperty(value = "用户ID")
     private String userId;
     @ApiModelProperty(value = "媒体数据URL")
-    private String mediaIds;
+    private String mediaUrls;
     @ApiModelProperty(value = "标签ID")
     private String tags;
 }

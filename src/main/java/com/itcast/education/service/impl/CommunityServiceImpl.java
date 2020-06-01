@@ -7,18 +7,14 @@ import com.itcast.education.mapper.CommentMapper;
 import com.itcast.education.mapper.PostMapper;
 import com.itcast.education.model.community.Comment;
 import com.itcast.education.model.community.Post;
-import com.itcast.education.model.media.MediaOutput;
 import com.itcast.education.model.user.User;
 import com.itcast.education.service.CommunityService;
-import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.TagService;
 import com.itcast.education.service.UserService;
 import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.JsonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -40,14 +36,11 @@ public class CommunityServiceImpl implements CommunityService {
     @Autowired
     private UserService userService;
     @Autowired
-    private MediaOutputService mediaOutputService;
-    @Autowired
     private TagService tagService;
 
-    @Autowired
+    @Resource
     private CommonUtil commonUtil;
 
-    @Cacheable(cacheNames = "communityPageData")
     @Override
     public CommunityPageDto getCommunityPageData(Integer pageDataSize) {
         CommunityPageDto pageData;
@@ -83,7 +76,7 @@ public class CommunityServiceImpl implements CommunityService {
         // 根据用户实体查到头像
         String headIcon = userService.findHeadIcon(hotPost.getUserId());
         // 根据媒体数据ID查找媒体数据集合
-        List<String> imagesUrl = mediaOutputService.findByIds(hotPost.getMediaIds());
+        List<String> imagesUrl = (List<String>) JsonUtil.strToPojo(hotPost.getMediaUrls(), List.class);
         // 头像
         hotPostMap.put(GeneralConstant.HEAD_ICON, headIcon);
         // 名称
@@ -118,14 +111,9 @@ public class CommunityServiceImpl implements CommunityService {
                 // 内容
                 postMap.put(GeneralConstant.POST_CONTENT, post.getPostContent());
                 // 图片
-                String mediaIds = post.getMediaIds();
-                List<Integer> ids = (List<Integer>) JsonUtil.strToPojo(mediaIds, List.class);
-                String mediaUrl = GeneralConstant.EMPTY;
-                if (!ValidateUtil.listIsEmpty(ids)) {
-                    MediaOutput media = mediaOutputService.findMediaById(ids.get(0));
-                    mediaUrl = media.getUrl();
-                }
-                postMap.put(GeneralConstant.IMG_URL, mediaUrl);
+                String mediaIds = post.getMediaUrls();
+                List<String> mediaUrls = (List<String>) JsonUtil.strToPojo(mediaIds, List.class);
+                postMap.put(GeneralConstant.IMG_URL, mediaUrls);
                 // 标签
                 String tags = post.getTags();
                 List<Integer> tagsList = (List<Integer>) JsonUtil.strToPojo(tags, List.class);
@@ -138,7 +126,6 @@ public class CommunityServiceImpl implements CommunityService {
         return result;
     }
 
-    @CachePut(cacheNames = "communityPageData", key = "#postDto.userId")
     @Override
     public boolean sendOrUpdateArticle(PostDto postDto, String token) {
         boolean result;
@@ -146,17 +133,7 @@ public class CommunityServiceImpl implements CommunityService {
         if (postDto == null) {
             return false;
         }
-        List<String> urlList = (List<String>) JsonUtil.strToPojo(postDto.getMediaIds(), List.class);
-        List<Integer> ids = new ArrayList<>();
-        if (!ValidateUtil.listIsEmpty(urlList)) {
-            for (String url : urlList) {
-                MediaOutput mediaOutput = mediaOutputService.findByUrl(url);
-                if (mediaOutput != null) {
-                    ids.add(mediaOutput.getMediaId());
-                }
-            }
-        }
-        postDto.setMediaIds(ids.toString());
+        // 因为转换会出错
         Post post = (Post) CommonUtil.convertDto2Entity(postDto, Post.class);
         Post isExistPost = validateIsExist(post);
         String userRealName = commonUtil.getLoginUsernameByToken(token);

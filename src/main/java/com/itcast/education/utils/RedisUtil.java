@@ -1,5 +1,6 @@
 package com.itcast.education.utils;
 
+import com.itcast.education.model.base.BaseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -120,5 +122,26 @@ public class RedisUtil {
             LOG.error("设置缓存出错", e);
             return false;
         }
+    }
+
+    /**
+     * 根据键值更新缓存
+     * @param key 缓存名称
+     * @param model 需要添加的实例
+     * @return
+     */
+    public boolean updateByKey(String key, Object model) {
+        boolean result = false;
+        try {
+            Object object = getByKey(key);
+            if (object instanceof List) {
+                List<Object> list = (List<Object>) object;
+                list.add(model);
+                result = set(key, list);
+            }
+        } catch (Exception e) {
+            LOG.error("更新缓存出错", e.getLocalizedMessage());
+        }
+        return result;
     }
 }
