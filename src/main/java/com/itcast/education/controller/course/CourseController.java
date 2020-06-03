@@ -12,10 +12,7 @@ import io.swagger.annotations.Authorization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zheng.zhang
@@ -31,7 +28,7 @@ public class CourseController {
 
     @ApiOperation(value = "添加课程", notes = "传入课程相关信息", authorizations = {@Authorization(value = "token")})
     @PutMapping("/addCourse")
-    public ResponseModel addCourse(CourseDto courseDto, @RequestParam String token) {
+    public ResponseModel addCourse(@RequestBody CourseDto courseDto, @RequestParam String token) {
         // DTO转化为实体对象
         Course course = (Course) CommonUtil.convertDto2Entity(courseDto, Course.class);
         boolean result = courseService.saveCourse(course, token);
