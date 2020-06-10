@@ -1,7 +1,5 @@
 package com.itcast.education.config;
 
-import java.math.BigInteger;
-
 /**
  * 通用常量
  * @author zheng.zhang
@@ -51,4 +49,6 @@ public class GeneralConstant {
     public static final String POST_CONTENT = "post_content";
     public static final String POST_IMAGES = "post_images";
     public static final String COMMUNITY_PAGE_DATA = "community_page_data";
+    public static final String NORMAL_DATE_STYLE = "yyyy-MM-dd HH:mm:ss";
+    public static final String COMMENTS = "comments";
 }

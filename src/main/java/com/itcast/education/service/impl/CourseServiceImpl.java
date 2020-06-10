@@ -3,12 +3,14 @@ package com.itcast.education.service.impl;
 import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.mapper.CourseMapper;
 import com.itcast.education.model.course.Course;
+import com.itcast.education.model.user.User;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -37,7 +39,11 @@ public class CourseServiceImpl implements CourseService {
         Course isExistCourse = validateIsExist(courseName);
 
         // 根据Token获取登录用户=>从Redis中获取
-        String userRealName = commonUtil.getLoginUsernameByToken(token);
+        User user = commonUtil.getLoginUsernameByToken(token);
+        String userRealName = GeneralConstant.COMMON_PERSON;
+        if (user != null && StringUtils.isEmpty(user.getUserRealName())) {
+            userRealName = user.getUserRealName();
+        }
         Integer rows = 0;
         if (isExistCourse == null) {
             // 封装ID

@@ -15,6 +15,26 @@
             ec.update_person
         FROM `ca_education`.`education_comment` ec
     </sql>
+    <insert id="save" parameterType="com.itcast.education.model.community.Comment">
+        INSERT INTO `ca_education`.`education_comment` (
+            `comment_content`,
+            `comment_user_id`,
+            `reply_user_ids`,
+            `image_urls`,
+            `post_id`,
+            `likes`,
+            `create_time`,
+            `create_person` )
+        VALUES (
+            #{commentContent},
+            #{commentUserId},
+            #{replyUserIds},
+            #{imageUrls},
+            #{postId},
+            #{likes},
+            #{createTime},
+            #{createPerson} )
+    </insert>
 
     <!--列表-->
     <select id="find" resultType="com.itcast.education.model.community.Comment">

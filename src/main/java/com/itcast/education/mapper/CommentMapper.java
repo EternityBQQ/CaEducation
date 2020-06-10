@@ -13,4 +13,11 @@ import java.util.List;
 public interface CommentMapper {
 
     List<Comment> find(Comment comment);
+
+    /**
+     * 保存
+     * @param comment 评论
+     * @return 是否成功
+     */
+    boolean save(Comment comment);
 }

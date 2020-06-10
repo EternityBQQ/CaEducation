@@ -2,6 +2,7 @@ package com.itcast.education.controller.community;
 
 import com.itcast.education.config.ErrorMessage;
 import com.itcast.education.config.GeneralConstant;
+import com.itcast.education.controller.dto.CommentDto;
 import com.itcast.education.controller.dto.CommunityPageDto;
 import com.itcast.education.controller.dto.PostDto;
 import com.itcast.education.model.base.ResponseModel;
@@ -12,9 +13,7 @@ import io.swagger.annotations.Authorization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,6 +44,22 @@ public class CommunityController {
         try {
             String token = request.getHeader(GeneralConstant.USER_TOKEN);
             boolean flag = communityService.sendOrUpdateArticle(postDto, token);
+            if (flag) {
+                return ResponseModel.ok();
+            } else {
+                return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.SEND_FAILED);
+            }
+        } catch (Exception e) {
+            return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
+        }
+    }
+
+    @ApiOperation(value = "发表评论", notes = "评论信息", authorizations = {@Authorization(value = "token")})
+    @PutMapping(value = "/sendComment")
+    public ResponseModel sendComment(@RequestBody CommentDto commentDto, HttpServletRequest request) {
+        try {
+            String userToken = request.getHeader(GeneralConstant.USER_TOKEN);
+            boolean flag = communityService.sendComment(commentDto, userToken);
             if (flag) {
                 return ResponseModel.ok();
             } else {

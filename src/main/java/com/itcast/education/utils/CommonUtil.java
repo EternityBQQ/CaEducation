@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author zheng.zhang
@@ -26,8 +29,9 @@ public class CommonUtil {
      * DTO转实体
      * @param dto DTO对象
      * @param targetClass 目标对象字节码
-     * @return
+     * @return 实体对象
      */
+    @SuppressWarnings("all")
     public static Object convertDto2Entity(Object dto, Class targetClass) {
         if (dto == null || targetClass == null) {
             return null;
@@ -67,20 +71,35 @@ public class CommonUtil {
 
     /**
      * 根据Token获取登录用户真实名称
-     * @param token
-     * @return
+     * @param token 用户Token
+     * @return 用户名
      */
-    public String getLoginUsernameByToken(String token) {
-        String personRealName = GeneralConstant.COMMON_PERSON;;
+    public User getLoginUsernameByToken(String token) {
+        User resultUser = null;
         try {
             // 根据Token获取登录用户=>从Redis中获取
-            User userCache = (User) redisUtil.getByKey(token);
-            if (userCache != null && !StringUtils.isEmpty(userCache.getUserRealName())) {
-                personRealName = userCache.getUserRealName();
-            }
+            resultUser = (User) redisUtil.getByKey(token);
         } catch (Exception e) {
             LOG.error("[CommonUtil] [getLoginUsernameByToken] has error", e);
         }
-        return personRealName;
+        return resultUser;
+    }
+
+    /**
+     * 格式化时间
+     * @param date 传入日期指定日期和格式
+     * @return 返回yyyy-MM-dd HH:mm:ss格式的时间
+     */
+    public String formatDateTime(Date date, String pattern) {
+        String formatDate = GeneralConstant.EMPTY;
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(pattern);
+            if (date != null && !StringUtils.isEmpty(pattern)) {
+                formatDate = dateFormat.format(date);
+            }
+        } catch (Exception e) {
+            LOG.error("[CommonUtil] [formatDateTime] has error", e);
+        }
+        return formatDate;
     }
 }

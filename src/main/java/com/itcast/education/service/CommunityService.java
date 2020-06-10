@@ -1,5 +1,6 @@
 package com.itcast.education.service;
 
+import com.itcast.education.controller.dto.CommentDto;
 import com.itcast.education.controller.dto.CommunityPageDto;
 import com.itcast.education.controller.dto.PostDto;
 
@@ -18,7 +19,15 @@ public interface CommunityService {
     /**
      * 发帖
      * @return 是否成功
-     * @param postDto
+     * @param postDto 帖子DTO
      */
     boolean sendOrUpdateArticle(PostDto postDto, String token);
+
+    /**
+     * 发表评论
+     * @param commentDto 评论DTO
+     * @param userToken 用户标识
+     * @return 是否成功
+     */
+    boolean sendComment(CommentDto commentDto, String userToken);
 }

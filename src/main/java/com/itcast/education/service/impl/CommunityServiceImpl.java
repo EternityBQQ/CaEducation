@@ -1,6 +1,7 @@
 package com.itcast.education.service.impl;
 
 import com.itcast.education.config.GeneralConstant;
+import com.itcast.education.controller.dto.CommentDto;
 import com.itcast.education.controller.dto.CommunityPageDto;
 import com.itcast.education.controller.dto.PostDto;
 import com.itcast.education.mapper.CommentMapper;
@@ -28,6 +29,7 @@ import java.util.*;
  * @date 2020/5/15 11:06
  */
 @Service
+@SuppressWarnings("all")
 public class CommunityServiceImpl implements CommunityService {
     @Resource
     private CommentMapper commentMapper;
@@ -62,8 +64,8 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * 封装社区交流版块页面数据
-     * @param posts
-     * @return
+     * @param posts 帖子
+     * @return 社区信息
      */
     private CommunityPageDto convertPageData(List<Post> posts) {
         CommunityPageDto pageDto = new CommunityPageDto();
@@ -82,11 +84,13 @@ public class CommunityServiceImpl implements CommunityService {
         // 名称
         hotPostMap.put(GeneralConstant.USERNAME, user.getUserRealName());
         // 发帖时间
-        hotPostMap.put(GeneralConstant.PUBLIC_TIME, hotPost.getCreateTime().toString());
+        hotPostMap.put(GeneralConstant.PUBLIC_TIME, commonUtil.formatDateTime(hotPost.getCreateTime(), GeneralConstant.NORMAL_DATE_STYLE));
         // 帖子内容
         hotPostMap.put(GeneralConstant.POST_CONTENT, hotPost.getPostContent());
         // 帖子媒体图片
         hotPostMap.put(GeneralConstant.POST_IMAGES, imagesUrl);
+        // 热帖评论
+        hotPostMap.put(GeneralConstant.COMMENTS, hotPost.getComments());
         pageDto.setHotPost(hotPostMap);
         //2. 设置论坛贴=>暂时设置为除开最新帖子之外的帖子
         posts.remove(posts.size() - 1);
@@ -136,7 +140,11 @@ public class CommunityServiceImpl implements CommunityService {
         // 因为转换会出错
         Post post = (Post) CommonUtil.convertDto2Entity(postDto, Post.class);
         Post isExistPost = validateIsExist(post);
-        String userRealName = commonUtil.getLoginUsernameByToken(token);
+        User user = commonUtil.getLoginUsernameByToken(token);
+        String userRealName = GeneralConstant.COMMON_PERSON;
+        if (user != null && StringUtils.isEmpty(user.getUserRealName())) {
+            userRealName = user.getUserRealName();
+        }
         // 设置未封装的字段
         if (isExistPost == null) {
             post.getPostId();
@@ -161,6 +169,28 @@ public class CommunityServiceImpl implements CommunityService {
             post.setUpdateTime(new Date());
             result = postMapper.update(post);
         }
+        return result;
+    }
+
+    @Override
+    public boolean sendComment(CommentDto commentDto, String userToken) {
+        boolean result = false;
+        Comment comment = (Comment) commonUtil.convertDto2Entity(commentDto, Comment.class);
+        User user = commonUtil.getLoginUsernameByToken(userToken);
+        String userId = GeneralConstant.EMPTY;
+        String username = GeneralConstant.COMMON_PERSON;
+        if (user != null) {
+            userId = user.getUserId();
+        }
+        // 设置评论人ID
+        comment.setCommentUserId(userId);
+        // 设置点赞量,默认为0
+        comment.setLikes(GeneralConstant.ZERO);
+        // 创建人
+        comment.setCreatePerson(username);
+        // 创建时间
+        comment.setCreateTime(new Date());
+        result = commentMapper.save(comment);
         return result;
     }
 

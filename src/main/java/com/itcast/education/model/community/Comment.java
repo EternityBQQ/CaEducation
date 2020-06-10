@@ -18,7 +18,7 @@ public class Comment extends BaseModel<Comment> {
     private String replyUserIds;
     private String imageUrls;
     private String postId;
-    private String likes;
+    private Integer likes;
 
     public Comment(String postId) {
         this.postId = postId;
