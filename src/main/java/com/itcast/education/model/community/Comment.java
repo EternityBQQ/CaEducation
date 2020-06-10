@@ -16,7 +16,7 @@ public class Comment extends BaseModel<Comment> {
     private String commentContent;
     private String commentUserId;
     private String replyUserIds;
-    private String mediaIds;
+    private String imageUrls;
     private String postId;
     private String likes;
 

@@ -1,29 +1,57 @@
-2020-06-03 09:44:44.979  INFO 14560 --- [restartedMain] c.itcast.education.EducationApplication  : Starting EducationApplication on DESKTOP-42LRO69 with PID 14560 (C:\MyFile\Java\mayun\Week2\education\target\classes started by zheng.zhang in C:\MyFile\Java\mayun\Week2\education)
-2020-06-03 09:44:45.017  INFO 14560 --- [restartedMain] c.itcast.education.EducationApplication  : No active profile set, falling back to default profiles: default
-2020-06-03 09:44:45.190  INFO 14560 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-06-03 09:44:45.190  INFO 14560 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-06-03 09:44:46.909  INFO 14560 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2020-06-03 09:44:46.912  INFO 14560 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2020-06-03 09:44:46.958  INFO 14560 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces.
-2020-06-03 09:44:47.832  INFO 14560 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8089 (http)
-2020-06-03 09:44:47.846  INFO 14560 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-06-03 09:44:47.847  INFO 14560 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
-2020-06-03 09:44:47.853  INFO 14560 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.21] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
-2020-06-03 09:44:47.853  INFO 14560 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.21] using APR version [1.6.5].
-2020-06-03 09:44:47.853  INFO 14560 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
-2020-06-03 09:44:47.854  INFO 14560 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-2020-06-03 09:44:47.858  INFO 14560 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
-2020-06-03 09:44:48.069  INFO 14560 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-06-03 09:44:48.070  INFO 14560 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2875 ms
-2020-06-03 09:44:49.764  INFO 14560 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2020-06-03 09:44:49.924  INFO 14560 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-06-03 09:44:49.981  INFO 14560 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-06-03 09:44:50.257  INFO 14560 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2020-06-03 09:44:50.278  INFO 14560 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2020-06-03 09:44:50.324  INFO 14560 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2020-06-03 09:44:50.603  INFO 14560 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8089 (http) with context path ''
-2020-06-03 09:44:50.606  INFO 14560 --- [restartedMain] c.itcast.education.EducationApplication  : Started EducationApplication in 6.596 seconds (JVM running for 9.33)
-2020-06-03 09:45:24.376  INFO 14560 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-06-03 09:45:24.376  INFO 14560 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-06-03 09:45:24.397  INFO 14560 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 20 ms
-2020-06-03 09:47:15.882  INFO 14560 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-10 11:50:57.806  INFO 18900 --- [restartedMain] c.itcast.education.EducationApplication  : Starting EducationApplication on DESKTOP-42LRO69 with PID 18900 (C:\MyFile\Java\mayun\Week2\education\target\classes started by zheng.zhang in C:\MyFile\Java\mayun\Week2\education)
+2020-06-10 11:50:57.823  INFO 18900 --- [restartedMain] c.itcast.education.EducationApplication  : No active profile set, falling back to default profiles: default
+2020-06-10 11:50:58.040  INFO 18900 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-06-10 11:50:58.041  INFO 18900 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-06-10 11:50:59.984  INFO 18900 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-10 11:50:59.989  INFO 18900 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-10 11:51:00.052  INFO 18900 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24ms. Found 0 Redis repository interfaces.
+2020-06-10 11:51:01.191  INFO 18900 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8089 (http)
+2020-06-10 11:51:01.207  INFO 18900 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-06-10 11:51:01.207  INFO 18900 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-06-10 11:51:01.210  INFO 18900 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.21] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-06-10 11:51:01.211  INFO 18900 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.21] using APR version [1.6.5].
+2020-06-10 11:51:01.211  INFO 18900 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-06-10 11:51:01.211  INFO 18900 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-06-10 11:51:01.236  INFO 18900 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
+2020-06-10 11:51:01.337  INFO 18900 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-06-10 11:51:01.337  INFO 18900 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3296 ms
+2020-06-10 11:51:02.986  INFO 18900 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-06-10 11:51:03.148  INFO 18900 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-10 11:51:03.212  INFO 18900 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-06-10 11:51:03.525  INFO 18900 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-06-10 11:51:03.564  INFO 18900 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-06-10 11:51:03.637  INFO 18900 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-06-10 11:51:03.990  INFO 18900 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8089 (http) with context path ''
+2020-06-10 11:51:03.994  INFO 18900 --- [restartedMain] c.itcast.education.EducationApplication  : Started EducationApplication in 7.388 seconds (JVM running for 9.687)
+2020-06-10 11:51:58.345  INFO 18900 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-10 11:52:05.301  INFO 15476 --- [restartedMain] c.itcast.education.EducationApplication  : Starting EducationApplication on DESKTOP-42LRO69 with PID 15476 (C:\MyFile\Java\mayun\Week2\education\target\classes started by zheng.zhang in C:\MyFile\Java\mayun\Week2\education)
+2020-06-10 11:52:05.306  INFO 15476 --- [restartedMain] c.itcast.education.EducationApplication  : No active profile set, falling back to default profiles: default
+2020-06-10 11:52:05.449  INFO 15476 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-06-10 11:52:05.502  INFO 15476 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-06-10 11:52:08.078  INFO 15476 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-10 11:52:08.085  INFO 15476 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-10 11:52:08.157  INFO 15476 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 29ms. Found 0 Redis repository interfaces.
+2020-06-10 11:52:09.658  INFO 15476 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8089 (http)
+2020-06-10 11:52:09.672  INFO 15476 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-06-10 11:52:09.673  INFO 15476 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-06-10 11:52:09.677  INFO 15476 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.21] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-06-10 11:52:09.678  INFO 15476 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.21] using APR version [1.6.5].
+2020-06-10 11:52:09.679  INFO 15476 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-06-10 11:52:09.681  INFO 15476 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-06-10 11:52:09.686  INFO 15476 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
+2020-06-10 11:52:09.823  INFO 15476 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-06-10 11:52:09.824  INFO 15476 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4321 ms
+2020-06-10 11:52:11.784  INFO 15476 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-06-10 11:52:11.925  INFO 15476 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-10 11:52:11.966  INFO 15476 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-06-10 11:52:12.225  INFO 15476 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-06-10 11:52:12.243  INFO 15476 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-06-10 11:52:12.307  INFO 15476 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-06-10 11:52:12.742  INFO 15476 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8089 (http) with context path ''
+2020-06-10 11:52:12.746  INFO 15476 --- [restartedMain] c.itcast.education.EducationApplication  : Started EducationApplication in 8.674 seconds (JVM running for 10.787)
+2020-06-10 11:52:20.288  INFO 15476 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-10 11:52:20.289  INFO 15476 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-06-10 11:52:20.305  INFO 15476 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2020-06-10 11:52:31.664  INFO 15476 --- [http-nio-8089-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-06-10 11:52:32.526  INFO 15476 --- [http-nio-8089-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-06-10 11:52:33.210  INFO 15476 --- [http-nio-8089-exec-2] c.i.e.c.community.CommunityController    : 社区数据获取成功

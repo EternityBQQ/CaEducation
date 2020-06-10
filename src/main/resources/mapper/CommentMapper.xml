@@ -6,7 +6,7 @@
             ec.comment_content,
             ec.comment_user_id,
             ec.reply_user_ids,
-            ec.media_ids,
+            ec.image_urls,
             ec.post_id,
             ec.likes,
             ec.create_time,
