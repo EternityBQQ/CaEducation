@@ -53,4 +53,5 @@ public class GeneralConstant {
     public static final String COMMENTS = "comments";
     public static final String POST_PAGE_VIEWS = "post_page_views";
     public static final String POST_LIKES = "post_likes";
+    public static final String POST_COMMENT_NUMBER = "post_comment_number";
 }

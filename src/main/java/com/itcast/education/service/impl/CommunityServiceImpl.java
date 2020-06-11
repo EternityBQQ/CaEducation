@@ -93,6 +93,12 @@ public class CommunityServiceImpl implements CommunityService {
         hotPostMap.put(GeneralConstant.POST_PAGE_VIEWS, hotPost.getPostPageViews());
         // 点赞量
         hotPostMap.put(GeneralConstant.POST_LIKES, hotPost.getPostLikes());
+        // 评论数
+        int commentNum = GeneralConstant.ZERO;
+        if (hotPost.getComments() != null) {
+            commentNum = hotPost.getComments().size();
+        }
+        hotPostMap.put(GeneralConstant.POST_COMMENT_NUMBER, commentNum);
         // 热帖评论
         hotPostMap.put(GeneralConstant.COMMENTS, hotPost.getComments());
         pageDto.setHotPost(hotPostMap);
