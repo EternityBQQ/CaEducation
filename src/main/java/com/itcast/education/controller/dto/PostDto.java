@@ -11,7 +11,6 @@ import java.util.List;
  * @description 发帖DTO
  * @date 2020/5/15 16:19
  */
-@Data
 @ApiModel(value = "帖子DTO信息")
 public class PostDto {
     @ApiModelProperty(value = "帖子标题")
@@ -21,7 +20,47 @@ public class PostDto {
     @ApiModelProperty(value = "用户ID")
     private String userId;
     @ApiModelProperty(value = "媒体数据URL")
-    private String mediaUrls;
+    private List<String> mediaUrls;
     @ApiModelProperty(value = "标签ID")
-    private String tags;
+    private List<Integer> tags;
+
+    public String getPostTitle() {
+        return postTitle;
+    }
+
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
+
+    public String getPostContent() {
+        return postContent;
+    }
+
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getMediaUrls() {
+        return mediaUrls.toString();
+    }
+
+    public void setMediaUrls(List<String> mediaUrls) {
+        this.mediaUrls = mediaUrls;
+    }
+
+    public String getTags() {
+        return tags.toString();
+    }
+
+    public void setTags(List<Integer> tags) {
+        this.tags = tags;
+    }
 }

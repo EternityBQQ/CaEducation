@@ -39,8 +39,8 @@ public class CommunityController {
     }
 
     @ApiOperation(value = "发表帖子", notes = "帖子信息", authorizations = {@Authorization(value = "token")})
-    @GetMapping(value = "/sendArticle")
-    public ResponseModel sendArticle(PostDto postDto, HttpServletRequest request) {
+    @PutMapping(value = "/sendArticle")
+    public ResponseModel sendArticle(@RequestBody PostDto postDto, HttpServletRequest request) {
         try {
             String token = request.getHeader(GeneralConstant.USER_TOKEN);
             boolean flag = communityService.sendOrUpdateArticle(postDto, token);
