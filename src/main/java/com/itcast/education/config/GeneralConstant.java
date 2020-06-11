@@ -51,4 +51,6 @@ public class GeneralConstant {
     public static final String COMMUNITY_PAGE_DATA = "community_page_data";
     public static final String NORMAL_DATE_STYLE = "yyyy-MM-dd HH:mm:ss";
     public static final String COMMENTS = "comments";
+    public static final String POST_PAGE_VIEWS = "post_page_views";
+    public static final String POST_LIKES = "post_likes";
 }
