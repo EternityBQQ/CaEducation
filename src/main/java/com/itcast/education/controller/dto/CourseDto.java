@@ -1,5 +1,6 @@
 package com.itcast.education.controller.dto;
 
+import com.itcast.education.utils.JsonUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -34,7 +35,7 @@ public class CourseDto {
     }
 
     public String getTags() {
-        return tags.toString();
+        return JsonUtil.objectToJson(this.tags);
     }
 
     public void setTags(List<Integer> tags) {
