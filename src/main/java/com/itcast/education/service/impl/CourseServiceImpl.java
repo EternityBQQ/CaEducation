@@ -76,7 +76,7 @@ public class CourseServiceImpl implements CourseService {
         Course course = Course.builder().build();
         course.setCourseName(courseName);
         List<Course> courses = courseMapper.queryCourses(GeneralConstant.COURSE_LIMIT_NUMBER, course);
-        if (ValidateUtil.listIsEmpty(courses)) {
+        if (!ValidateUtil.listIsEmpty(courses)) {
             return courses.get(0);
         }
         return null;

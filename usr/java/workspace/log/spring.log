@@ -439,3 +439,15 @@ Caused by: java.lang.NullPointerException: null
 2020-06-11 09:20:57.878  INFO 7972 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
 2020-06-11 09:20:58.310  INFO 7972 --- [main] c.i.education.EducationApplicationTests  : Started EducationApplicationTests in 8.953 seconds (JVM running for 10.427)
 2020-06-11 09:20:58.875  INFO 7972 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-11 09:26:43.264  INFO 9972 --- [main] c.i.education.EducationApplicationTests  : Starting EducationApplicationTests on DESKTOP-42LRO69 with PID 9972 (started by zheng.zhang in C:\MyFile\Java\mayun\Week2\education)
+2020-06-11 09:26:43.267  INFO 9972 --- [main] c.i.education.EducationApplicationTests  : No active profile set, falling back to default profiles: default
+2020-06-11 09:26:44.892  INFO 9972 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-11 09:26:44.896  INFO 9972 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-11 09:26:44.942  INFO 9972 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 26ms. Found 0 Redis repository interfaces.
+2020-06-11 09:26:48.868  INFO 9972 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-06-11 09:26:49.544  INFO 9972 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-11 09:26:50.252  INFO 9972 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-06-11 09:26:50.300  INFO 9972 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-06-11 09:26:50.357  INFO 9972 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-06-11 09:26:50.674  INFO 9972 --- [main] c.i.education.EducationApplicationTests  : Started EducationApplicationTests in 8.293 seconds (JVM running for 10.536)
+2020-06-11 09:26:51.247  INFO 9972 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
