@@ -1,5 +1,6 @@
 package com.itcast.education.controller.dto;
 
+import com.itcast.education.utils.JsonUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -49,7 +50,7 @@ public class PostDto {
     }
 
     public String getMediaUrls() {
-        return mediaUrls.toString();
+        return JsonUtil.objectToJson(this.mediaUrls);
     }
 
     public void setMediaUrls(List<String> mediaUrls) {

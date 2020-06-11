@@ -1,7 +1,9 @@
 package com.itcast.education.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itcast.education.config.GeneralConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,16 @@ public final class JsonUtil {
      * @return
      */
     public static String objectToJson(Object data) {
-        return null;
+        String result = GeneralConstant.EMPTY;
+        try {
+            if (data == null) {
+                return result;
+            }
+            result = MAPPER.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            LOG.error("对象转json出错：[JsonUtil] [objectToJson]", e);
+        }
+        return result;
     }
 
     /**
@@ -42,7 +53,7 @@ public final class JsonUtil {
             }
             result = MAPPER.readValue(json, clazz);
         } catch (IOException e) {
-            LOG.error("对象转换出错: [JsonUtil] [strToPojo]");
+            LOG.error("对象转换出错: [JsonUtil] [strToPojo]", e);
         }
         return result;
     }
