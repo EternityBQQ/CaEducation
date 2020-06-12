@@ -108,6 +108,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public String findHeadIcon(String userId) {
         User user = findUser(userId);
+        return findHeadIcon(user);
+    }
+
+    @Override
+    public String findHeadIcon(User user) {
         Integer iconMediaId = user.getIconMediaId();
         // 根据媒体ID获取图片信息
         MediaOutput mediaOutput = mediaOutputService.findMediaById(iconMediaId);

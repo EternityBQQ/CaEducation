@@ -3,6 +3,7 @@ package com.itcast.education.service;
 import com.itcast.education.controller.dto.CommentDto;
 import com.itcast.education.controller.dto.CommunityPageDto;
 import com.itcast.education.controller.dto.PostDto;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 
 /**
  * 社区交流信息模块
@@ -14,7 +15,7 @@ public interface CommunityService {
      * @param pageDataSize 帖子数量
      * @return DTO
      */
-    CommunityPageDto getCommunityPageData(Integer pageDataSize);
+    CommunityPageDto getCommunityPageData(Integer pageDataSize) throws JSONException;
 
     /**
      * 发帖

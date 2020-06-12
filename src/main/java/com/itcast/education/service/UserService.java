@@ -45,4 +45,11 @@ public interface UserService {
      * @return
      */
     String findHeadIcon(String userId);
+
+    /**
+     * 根据用户获取头像
+     * @param user
+     * @return
+     */
+    String findHeadIcon(User user);
 }

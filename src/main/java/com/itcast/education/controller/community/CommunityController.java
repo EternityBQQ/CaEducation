@@ -13,6 +13,7 @@ import io.swagger.annotations.Authorization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +34,13 @@ public class CommunityController {
     @ApiOperation(value = "页面数据列表", notes = "交流页面数据json", authorizations = {@Authorization(value = "token")})
     @GetMapping(value = "/communityTab")
     public ResponseModel loadCommunityPageData(Integer pageDataSize) {
-        CommunityPageDto pageDto = communityService.getCommunityPageData(pageDataSize);
-        LOG.info("社区数据获取成功", pageDto);
+        CommunityPageDto pageDto;
+        try {
+            pageDto = communityService.getCommunityPageData(pageDataSize);
+            LOG.info("社区数据获取成功", pageDto);
+        } catch (JSONException e) {
+            return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
+        }
         return ResponseModel.ok(pageDto);
     }
 

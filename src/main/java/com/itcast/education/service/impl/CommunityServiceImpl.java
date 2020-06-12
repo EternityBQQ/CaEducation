@@ -16,6 +16,9 @@ import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.JsonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -44,7 +47,7 @@ public class CommunityServiceImpl implements CommunityService {
     private CommonUtil commonUtil;
 
     @Override
-    public CommunityPageDto getCommunityPageData(Integer pageDataSize) {
+    public CommunityPageDto getCommunityPageData(Integer pageDataSize) throws JSONException {
         CommunityPageDto pageData;
         // 帖子
         List<Post> posts = postMapper.find(new Post());
@@ -67,7 +70,7 @@ public class CommunityServiceImpl implements CommunityService {
      * @param posts 帖子
      * @return 社区信息
      */
-    private CommunityPageDto convertPageData(List<Post> posts) {
+    private CommunityPageDto convertPageData(List<Post> posts) throws JSONException {
         CommunityPageDto pageDto = new CommunityPageDto();
         //1. 设置热帖=>标题贴暂时设置为最新数据
         Post hotPost = posts.get(posts.size() - 1);
@@ -99,14 +102,65 @@ public class CommunityServiceImpl implements CommunityService {
             commentNum = hotPost.getComments().size();
         }
         hotPostMap.put(GeneralConstant.POST_COMMENT_NUMBER, commentNum);
+        // 将评论信息树形结构封装
+        List<Comment> commentTree = getCommentTree(hotPost.getComments());
         // 热帖评论
-        hotPostMap.put(GeneralConstant.COMMENTS, hotPost.getComments());
+        hotPostMap.put(GeneralConstant.COMMENTS, convertCommentData(commentTree));
         pageDto.setHotPost(hotPostMap);
         //2. 设置论坛贴=>暂时设置为除开最新帖子之外的帖子
         posts.remove(posts.size() - 1);
         List<Map<String, Object>> postsMap = getOriginalPost(posts);
         pageDto.setPosts(postsMap);
         return pageDto;
+    }
+
+    /**
+     * 封装评论的树形结构
+     * @param comments
+     * @return
+     */
+    private List<Comment> getCommentTree(List<Comment> comments) {
+        List<Comment> resultComment = new ArrayList<>();
+        if (!ValidateUtil.listIsEmpty(comments)) {
+            comments.stream()
+                    .filter(node -> node.getReplyCommentId() == GeneralConstant.ZERO)
+                    .forEach(node -> {
+                        resultComment.add(node);
+                    });
+        }
+        return resultComment;
+    }
+
+    /**
+     * 封装评论信息
+     * @param comments
+     * @return
+     */
+    private List<Map<String, Object>> convertCommentData(List<Comment> comments) throws JSONException {
+        List<Map<String, Object>> result = new ArrayList<>();
+        if (!ValidateUtil.listIsEmpty(comments)) {
+            for (Comment comment : comments) {
+                Map<String, Object> itemObj = new HashMap<>();
+                String commentUserId = comment.getCommentUserId();
+                User commentUser = userService.findUser(commentUserId);
+                // 登录人头像
+                String headIcon = GeneralConstant.EMPTY;
+                // 登录人名称
+                String commentUsername = GeneralConstant.EMPTY;
+                if (commentUser != null) {
+                    headIcon = userService.findHeadIcon(commentUser);
+                    commentUsername = commentUser.getUsername();
+                }
+                itemObj.put(GeneralConstant.IMAGE, headIcon);
+                itemObj.put(GeneralConstant.USERNAME, commentUsername);
+                // 评论内容
+                itemObj.put(GeneralConstant.COMMENT_CONTENT, comment.getCommentContent());
+                // 回复帖子=>回复人: 回复内容的格式
+                itemObj.put(GeneralConstant.REPLY_COMMENTS, comment.getReplyComments());
+                result.add(itemObj);
+            }
+        }
+        return result;
     }
 
     /**

@@ -4,6 +4,10 @@ import com.itcast.education.model.base.BaseModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author zheng.zhang
  * @description 评论实体
@@ -15,10 +19,12 @@ public class Comment extends BaseModel<Comment> {
     private Integer commentId;
     private String commentContent;
     private String commentUserId;
-    private String replyUserIds;
-    private String imageUrls;
+    private Integer replyCommentId;
+    private String imageUrl;
     private String postId;
     private Integer likes;
+
+    private List<Comment> replyComments = new ArrayList<>();
 
     public Comment(String postId) {
         this.postId = postId;
