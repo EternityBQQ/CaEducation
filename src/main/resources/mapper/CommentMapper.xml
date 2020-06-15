@@ -41,7 +41,7 @@
         <include refid="baseQuery"/>
         <where>
             <if test="commentId != null and commentId != ''">
-                AND ec.comment_id = #{comment_id}
+                AND ec.comment_id = #{commentId}
             </if>
             <if test="postId != null and postId != ''">
                 AND ec.post_id = #{postId}

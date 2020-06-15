@@ -4,6 +4,7 @@ import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.controller.dto.CommentDto;
 import com.itcast.education.controller.dto.CommunityPageDto;
 import com.itcast.education.controller.dto.PostDto;
+import com.itcast.education.controller.vo.ReplyCommentVo;
 import com.itcast.education.mapper.CommentMapper;
 import com.itcast.education.mapper.PostMapper;
 import com.itcast.education.model.community.Comment;
@@ -16,9 +17,7 @@ import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.JsonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -28,11 +27,10 @@ import java.util.*;
 
 /**
  * @author zheng.zhang
- * @description 社区交流信息模块服务层
- * @date 2020/5/15 11:06
+ * description 社区交流信息模块服务层
+ * date 2020/5/15 11:06
  */
 @Service
-@SuppressWarnings("all")
 public class CommunityServiceImpl implements CommunityService {
     @Resource
     private CommentMapper commentMapper;
@@ -55,7 +53,7 @@ public class CommunityServiceImpl implements CommunityService {
             return null;
         }
         // 评论
-        for (Post post: posts) {
+        for (Post post : posts) {
             String postId = post.getPostId();
             // 根据帖子ID拿到它下面的所有评论
             List<Comment> comments = commentMapper.find(new Comment(postId));
@@ -67,9 +65,11 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * 封装社区交流版块页面数据
+     *
      * @param posts 帖子
      * @return 社区信息
      */
+    @SuppressWarnings("all")
     private CommunityPageDto convertPageData(List<Post> posts) throws JSONException {
         CommunityPageDto pageDto = new CommunityPageDto();
         //1. 设置热帖=>标题贴暂时设置为最新数据
@@ -116,27 +116,83 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * 封装评论的树形结构
-     * @param comments
-     * @return
+     *
+     * @param comments 评论集合
+     * @return 评论树形结构
      */
     private List<Comment> getCommentTree(List<Comment> comments) {
         List<Comment> resultComment = new ArrayList<>();
         if (!ValidateUtil.listIsEmpty(comments)) {
             comments.stream()
-                    .filter(node -> node.getReplyCommentId() == GeneralConstant.ZERO)
-                    .forEach(node -> {
-                        resultComment.add(node);
+                    .filter(node -> node.getReplyCommentId().equals(GeneralConstant.ZERO))
+                    .forEach(parentNode -> {
+                        // 设置子评论信息
+                        setChildComment(comments, parentNode);
+                        resultComment.add(parentNode);
                     });
         }
         return resultComment;
     }
 
     /**
-     * 封装评论信息
-     * @param comments
-     * @return
+     * 设置子评论信息
+     * @param comments 评论
+     * @param parentNode 父节点
      */
-    private List<Map<String, Object>> convertCommentData(List<Comment> comments) throws JSONException {
+    private void setChildComment(List<Comment> comments, Comment parentNode) {
+        comments.stream()
+                .filter(comment -> comment.getReplyCommentId().equals(parentNode.getCommentId()) || isChildComment(parentNode, comment))
+                .forEach(childComment -> {
+                    User replyUser = userService.findUser(childComment.getCommentUserId());
+                    String replyUsername = GeneralConstant.EMPTY;
+                    if (replyUser != null) {
+                        replyUsername = replyUser.getUsername();
+                    }
+                    parentNode.getReplyComments().add(new ReplyCommentVo(replyUsername, childComment.getCommentContent()));
+                });
+    }
+
+    /**
+     * 是否是父节点的子节点
+     * @param parentNode 父节点
+     * @param childNode 子节点
+     * @return 结果
+     */
+    private boolean isChildComment(Comment parentNode, Comment childNode) {
+        boolean flag = false;
+        if (childNode.getReplyCommentId() > GeneralConstant.ZERO) {
+            if (childNode.getReplyCommentId().equals(parentNode.getCommentId())) {
+                flag = true;
+            } else {
+                isChildComment(findCommentById(childNode.getReplyCommentId()), childNode);
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 通过ID查找评论信息
+     * @param commentId 评论ID
+     * @return 结果
+     */
+    public Comment findCommentById(Integer commentId) {
+        if (commentId < GeneralConstant.ZERO) {
+            return null;
+        }
+        Comment comment = null;
+        List<Comment> comments = commentMapper.find(new Comment(commentId));
+        if (comments != null && !comments.isEmpty()) {
+            comment = comments.get(0);
+        }
+        return comment;
+    }
+
+    /**
+     * 封装评论信息
+     * @param comments 评论
+     * @return 返回结果
+     */
+    private List<Map<String, Object>> convertCommentData(List<Comment> comments) {
         List<Map<String, Object>> result = new ArrayList<>();
         if (!ValidateUtil.listIsEmpty(comments)) {
             for (Comment comment : comments) {
@@ -168,11 +224,12 @@ public class CommunityServiceImpl implements CommunityService {
      * @param posts 帖子集合实例
      * @return 其他帖子集合对象
      */
+    @SuppressWarnings("all")
     private List<Map<String, Object>> getOriginalPost(List<Post> posts) {
         List<Map<String, Object>> result = new ArrayList<>();
         // ============================
         if (!ValidateUtil.listIsEmpty(posts)) {
-            for (Post post: posts) {
+            for (Post post : posts) {
                 Map<String, Object> postMap = new HashMap<>();
                 // 标题
                 postMap.put(GeneralConstant.TITLE, post.getPostTitle());
@@ -195,6 +252,7 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
+    @SuppressWarnings("all")
     public boolean sendOrUpdateArticle(PostDto postDto, String token) {
         boolean result;
         // 通过URL找到ID
@@ -237,6 +295,7 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
+    @SuppressWarnings("all")
     public boolean sendComment(CommentDto commentDto, String userToken) {
         boolean result = false;
         Comment comment = (Comment) commonUtil.convertDto2Entity(commentDto, Comment.class);
@@ -260,17 +319,18 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * 校验该帖子是否已经发布
-     * @param post
-     * @return
+     * @param post 校验贴
+     * @return 存在帖子
      */
     private Post validateIsExist(Post post) {
         // 校验是否存在postId
+        Post result = null;
         if (post != null && !StringUtils.isEmpty(post.getPostId())) {
             List<Post> posts = postMapper.find(post);
             if (!ValidateUtil.listIsEmpty(posts)) {
-                return posts.get(0);
+                result = posts.get(0);
             }
         }
-        return null;
+        return result;
     }
 }
