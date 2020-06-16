@@ -124,7 +124,7 @@ public class CommunityServiceImpl implements CommunityService {
         List<Comment> resultComment = new ArrayList<>();
         if (!ValidateUtil.listIsEmpty(comments)) {
             comments.stream()
-                    .filter(node -> node.getReplyCommentId().equals(GeneralConstant.ZERO))
+                    .filter(node -> GeneralConstant.ZERO.equals(node.getReplyCommentId()))
                     .forEach(parentNode -> {
                         // 设置子评论信息
                         setChildComment(comments, parentNode);
@@ -141,7 +141,8 @@ public class CommunityServiceImpl implements CommunityService {
      */
     private void setChildComment(List<Comment> comments, Comment parentNode) {
         comments.stream()
-                .filter(comment -> isChildComment(parentNode, comment))
+                .filter(node -> !GeneralConstant.ZERO.equals(node.getReplyCommentId()))
+                .filter(childNode -> isChildComment(parentNode, childNode))
                 .forEach(childComment -> {
                     User replyUser = userService.findUser(childComment.getCommentUserId());
                     String replyUsername = GeneralConstant.EMPTY;
@@ -164,7 +165,8 @@ public class CommunityServiceImpl implements CommunityService {
             if (childNode.getReplyCommentId().equals(parentNode.getCommentId())) {
                 flag = true;
             } else {
-                flag = isChildComment(findCommentById(childNode.getReplyCommentId()), childNode);
+                Comment tempNode = findCommentById(childNode.getReplyCommentId());
+                flag = isChildComment(parentNode, tempNode);
             }
         }
         return flag;
