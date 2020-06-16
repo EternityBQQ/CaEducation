@@ -56,4 +56,5 @@ public class GeneralConstant {
     public static final String POST_COMMENT_NUMBER = "post_comment_number";
     public static final String COMMENT_CONTENT = "comment_content";
     public static final String REPLY_COMMENTS = "reply_comments";
+    public static final String CREATE_TIME = "create_time";
 }

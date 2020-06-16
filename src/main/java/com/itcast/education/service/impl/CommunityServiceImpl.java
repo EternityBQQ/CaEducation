@@ -213,6 +213,8 @@ public class CommunityServiceImpl implements CommunityService {
                 itemObj.put(GeneralConstant.COMMENT_CONTENT, comment.getCommentContent());
                 // 回复帖子=>回复人: 回复内容的格式
                 itemObj.put(GeneralConstant.REPLY_COMMENTS, comment.getReplyComments());
+                // 发布时间
+                itemObj.put(GeneralConstant.CREATE_TIME, comment.getCreateTime());
                 result.add(itemObj);
             }
         }
