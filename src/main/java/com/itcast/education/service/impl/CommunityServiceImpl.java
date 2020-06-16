@@ -141,7 +141,7 @@ public class CommunityServiceImpl implements CommunityService {
      */
     private void setChildComment(List<Comment> comments, Comment parentNode) {
         comments.stream()
-                .filter(comment -> comment.getReplyCommentId().equals(parentNode.getCommentId()) || isChildComment(parentNode, comment))
+                .filter(comment -> isChildComment(parentNode, comment))
                 .forEach(childComment -> {
                     User replyUser = userService.findUser(childComment.getCommentUserId());
                     String replyUsername = GeneralConstant.EMPTY;
@@ -164,7 +164,7 @@ public class CommunityServiceImpl implements CommunityService {
             if (childNode.getReplyCommentId().equals(parentNode.getCommentId())) {
                 flag = true;
             } else {
-                isChildComment(findCommentById(childNode.getReplyCommentId()), childNode);
+                flag = isChildComment(findCommentById(childNode.getReplyCommentId()), childNode);
             }
         }
         return flag;
