@@ -2,7 +2,7 @@ package com.itcast.education.controller.user;
 
 import com.itcast.education.config.ErrorMessage;
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.controller.dto.UserDto;
+import com.itcast.education.dto.UserDto;
 import com.itcast.education.model.base.ResponseModel;
 import com.itcast.education.model.user.User;
 import com.itcast.education.service.UserService;

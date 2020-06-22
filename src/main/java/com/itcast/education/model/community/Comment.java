@@ -1,6 +1,6 @@
 package com.itcast.education.model.community;
 
-import com.itcast.education.controller.vo.ReplyCommentVo;
+import com.itcast.education.vo.ReplyCommentVo;
 import com.itcast.education.model.base.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

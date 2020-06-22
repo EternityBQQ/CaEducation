@@ -1,6 +1,6 @@
 package com.itcast.education.service;
 
-import com.itcast.education.controller.dto.HomePageDto;
+import com.itcast.education.dto.HomePageDto;
 import com.itcast.education.model.media.MediaOutput;
 
 import java.util.List;

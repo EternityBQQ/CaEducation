@@ -1,10 +1,10 @@
 package com.itcast.education.service.impl;
 
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.controller.dto.CommentDto;
-import com.itcast.education.controller.dto.CommunityPageDto;
-import com.itcast.education.controller.dto.PostDto;
-import com.itcast.education.controller.vo.ReplyCommentVo;
+import com.itcast.education.dto.CommentDto;
+import com.itcast.education.dto.CommunityPageDto;
+import com.itcast.education.dto.PostDto;
+import com.itcast.education.vo.ReplyCommentVo;
 import com.itcast.education.mapper.CommentMapper;
 import com.itcast.education.mapper.PostMapper;
 import com.itcast.education.model.community.Comment;

@@ -1,8 +1,7 @@
 package com.itcast.education;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itcast.education.controller.dto.CourseDto;
-import com.itcast.education.model.base.BaseModel;
+import com.itcast.education.dto.CourseDto;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.utils.CommonUtil;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.itcast.education.controller.vo;
+package com.itcast.education.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

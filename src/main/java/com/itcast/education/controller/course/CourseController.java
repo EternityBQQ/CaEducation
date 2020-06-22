@@ -1,7 +1,7 @@
 package com.itcast.education.controller.course;
 
 import com.itcast.education.config.ErrorMessage;
-import com.itcast.education.controller.dto.CourseDto;
+import com.itcast.education.dto.CourseDto;
 import com.itcast.education.model.base.ResponseModel;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.service.CourseService;

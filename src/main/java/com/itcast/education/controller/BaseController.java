@@ -1,7 +1,7 @@
 package com.itcast.education.controller;
 
 import com.itcast.education.controller.course.CourseController;
-import com.itcast.education.controller.dto.HomePageDto;
+import com.itcast.education.dto.HomePageDto;
 import com.itcast.education.model.base.ResponseModel;
 import com.itcast.education.service.MediaOutputService;
 import io.swagger.annotations.*;

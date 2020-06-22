@@ -2,9 +2,9 @@ package com.itcast.education.controller.community;
 
 import com.itcast.education.config.ErrorMessage;
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.controller.dto.CommentDto;
-import com.itcast.education.controller.dto.CommunityPageDto;
-import com.itcast.education.controller.dto.PostDto;
+import com.itcast.education.dto.CommentDto;
+import com.itcast.education.dto.CommunityPageDto;
+import com.itcast.education.dto.PostDto;
 import com.itcast.education.model.base.ResponseModel;
 import com.itcast.education.service.CommunityService;
 import io.swagger.annotations.Api;

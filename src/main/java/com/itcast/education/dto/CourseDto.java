@@ -1,4 +1,4 @@
-package com.itcast.education.controller.dto;
+package com.itcast.education.dto;
 
 import com.itcast.education.utils.JsonUtil;
 import io.swagger.annotations.ApiModel;

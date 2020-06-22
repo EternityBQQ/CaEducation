@@ -1,7 +1,7 @@
 package com.itcast.education.service.impl;
 
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.controller.dto.HomePageDto;
+import com.itcast.education.dto.HomePageDto;
 import com.itcast.education.mapper.MediaOutputMapper;
 import com.itcast.education.model.course.Course;
 import com.itcast.education.model.media.MediaOutput;

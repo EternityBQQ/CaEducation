@@ -1,9 +1,8 @@
-package com.itcast.education.controller.dto;
+package com.itcast.education.dto;
 
 import com.itcast.education.utils.JsonUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 import java.util.List;
 
