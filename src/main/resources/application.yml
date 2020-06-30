@@ -1,75 +1,11 @@
 server:
   port: 8089
 spring:
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://39.97.231.147:3306/ca_education?useUnicode=true&characterEncoding=UTF8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  #Jackson配置
-  jackson:
-    #日期格式化
-    date-format: yyyy-MM-dd HH:mm:ss
-    #日期时区
-    time-zone: GMT+8
-    #返回Null不显示
-    default-property-inclusion: non_null
-  #Redis
-  redis:
-    # Redis数据库索引（默认为0）
-    database: 0
-    # Redis服务器地址
-    host: 39.97.231.147
-    # Redis服务器连接端口
-    port: 6379
-    # Redis服务器连接密码（默认为空）
-    password: 2215751025Zhang
-    jedis:
-      pool:
-        # 连接池最大连接数（使用负值表示没有限制）
-        max-active: 200
-        # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1
-        # 连接池中的最大空闲连接
-        max-idle: 10
-        # 连接池中的最小空闲连接
-        min-idle: 0
-    # 连接超时时间（毫秒）
-    timeout: 1000
+  application:
+    name: education-provider
 
-mybatis:
-  mapper-locations: classpath*:mapper/*Mapper.xml
-  type-aliases-package: com.itcast.education.model
-  configuration:
-    # 打印SQL
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # 开启驼峰转下划线
-    map-underscore-to-camel-case: true
-
-#swagger 配置
-swagger:
-  title: CaEducation测试Swagger APIs
-  desc: 基于springBoot编写的RESful-API，CaEducation的后端swagger接口，统一在该平台示例。
-  version: 0.0.1.SNAPSHOT
-  termsOfServiceUrl: javascript:void(0)
-  #许可证
-  license: 涨涨开发
-  #许可证网站
-  licenseUrl: javascript:void(0)
-  #API所在的包
-  basePackage: com.itcast.education.controller
-  #组名
-  groupName: baseModule
-  #作者信息
-  contactName: zheng.zhang
-  contactUrl: https://github.com/EternityBQQ/CaEducation.git
-  contactEmail: 2215751025@qq.com
-
-#使用Spring默认的slf4j日志,保存日志文件到本地
-logging:
-  file:
-    path: usr/java/workspace/log
-  level:
-    com:
-      acong:
-        dao: debug
+nacos:
+  config:
+    server-addr: 39.97.231.147:8848
+  discovery:
+    server-addr: 39.97.231.147:8848
