@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
  * @author zheng.zhang
  * 2020/06/30 18:31:25
  */
-@Configuration
+//@Configuration
 public class RegisterConfig {
     @Value("${server.port}")
     private int serverPort;
