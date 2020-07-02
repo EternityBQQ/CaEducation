@@ -160,7 +160,7 @@
                     <!-- 镜像名称 -->
                     <imageName>${project.artifactId}</imageName>
                     <!-- docker远程服务器地址 -->
-                    <dockerHost>http://39.97.231.147:2375</dockerHost>
+                    <dockerHost>https://39.97.231.147:2379</dockerHost>
                     <!-- Dockerfile文件存放目录 -->
                     <dockerDirectory>src/main/docker</dockerDirectory>
                     <resources>
