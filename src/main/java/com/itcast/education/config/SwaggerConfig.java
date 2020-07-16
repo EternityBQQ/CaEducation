@@ -24,9 +24,9 @@ import java.util.List;
  * @date 2020/4/27 9:38
  */
 @Data
-@Configuration
-@EnableSwagger2
-@ConfigurationProperties(prefix = "swagger")
+//@Configuration
+//@EnableSwagger2
+//@ConfigurationProperties(prefix = "swagger")
 public class SwaggerConfig {
     private String title;
     private String desc;
