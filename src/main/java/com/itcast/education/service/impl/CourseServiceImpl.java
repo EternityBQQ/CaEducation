@@ -10,6 +10,9 @@ import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRES_NEW, rollbackFor = {RuntimeException.class, Error.class})
 public class CourseServiceImpl implements CourseService {
     @Resource
     private CourseMapper courseMapper;
@@ -27,8 +31,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> queryCourses(Integer courseLimitNumber) {
-        List<Course> courses = courseMapper.queryCourses(courseLimitNumber, new Course());
-        return courses;
+        return courseMapper.queryCourses(courseLimitNumber, new Course());
     }
 
     @Override
@@ -69,8 +72,8 @@ public class CourseServiceImpl implements CourseService {
 
     /**
      * 校验该课程是否已经上传
-     * @param courseName
-     * @return
+     * @param courseName 课程名
+     * @return 课程信息
      */
     private Course validateIsExist(String courseName) {
         Course course = Course.builder().build();
