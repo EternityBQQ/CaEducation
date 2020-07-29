@@ -2,10 +2,10 @@ package com.itcast.education.controller.community;
 
 import com.itcast.education.config.ErrorMessage;
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.dto.CommentDto;
-import com.itcast.education.dto.CommunityPageDto;
-import com.itcast.education.dto.PostDto;
-import com.itcast.education.model.base.ResponseModel;
+import com.itcast.education.model.dto.CommentDto;
+import com.itcast.education.model.dto.CommunityPageDto;
+import com.itcast.education.model.dto.PostDto;
+import com.itcast.education.model.pojo.base.ResponseModel;
 import com.itcast.education.service.CommunityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

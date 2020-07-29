@@ -1,6 +1,6 @@
 package com.itcast.education.service;
 
-import com.itcast.education.model.course.Tag;
+import com.itcast.education.model.pojo.course.Tag;
 
 import java.util.List;
 

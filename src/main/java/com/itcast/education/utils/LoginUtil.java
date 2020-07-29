@@ -1,6 +1,6 @@
 package com.itcast.education.utils;
 
-import com.itcast.education.model.user.User;
+import com.itcast.education.model.pojo.user.User;
 import org.springframework.util.DigestUtils;
 
 import java.util.UUID;

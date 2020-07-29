@@ -1,10 +1,10 @@
 package com.itcast.education.service.impl;
 
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.dto.HomePageDto;
+import com.itcast.education.model.dto.HomePageDto;
 import com.itcast.education.mapper.MediaOutputMapper;
-import com.itcast.education.model.course.Course;
-import com.itcast.education.model.media.MediaOutput;
+import com.itcast.education.model.pojo.course.Course;
+import com.itcast.education.model.pojo.media.MediaOutput;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.service.MediaOutputService;
 import com.itcast.education.service.TagService;

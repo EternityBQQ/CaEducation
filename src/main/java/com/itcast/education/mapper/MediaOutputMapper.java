@@ -1,6 +1,6 @@
 package com.itcast.education.mapper;
 
-import com.itcast.education.model.media.MediaOutput;
+import com.itcast.education.model.pojo.media.MediaOutput;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

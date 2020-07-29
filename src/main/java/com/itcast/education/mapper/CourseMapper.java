@@ -1,6 +1,6 @@
 package com.itcast.education.mapper;
 
-import com.itcast.education.model.course.Course;
+import com.itcast.education.model.pojo.course.Course;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

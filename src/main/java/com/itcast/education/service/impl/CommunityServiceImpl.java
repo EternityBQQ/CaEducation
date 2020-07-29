@@ -1,15 +1,15 @@
 package com.itcast.education.service.impl;
 
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.dto.CommentDto;
-import com.itcast.education.dto.CommunityPageDto;
-import com.itcast.education.dto.PostDto;
-import com.itcast.education.vo.ReplyCommentVo;
+import com.itcast.education.model.dto.CommentDto;
+import com.itcast.education.model.dto.CommunityPageDto;
+import com.itcast.education.model.dto.PostDto;
+import com.itcast.education.model.vo.ReplyCommentVo;
 import com.itcast.education.mapper.CommentMapper;
 import com.itcast.education.mapper.PostMapper;
-import com.itcast.education.model.community.Comment;
-import com.itcast.education.model.community.Post;
-import com.itcast.education.model.user.User;
+import com.itcast.education.model.pojo.community.Comment;
+import com.itcast.education.model.pojo.community.Post;
+import com.itcast.education.model.pojo.user.User;
 import com.itcast.education.service.CommunityService;
 import com.itcast.education.service.TagService;
 import com.itcast.education.service.UserService;

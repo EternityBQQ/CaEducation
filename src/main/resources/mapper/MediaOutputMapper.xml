@@ -17,7 +17,7 @@
         FROM media_output mo
     </sql>
     <!--结果集映射-->
-    <resultMap id="baseMap" type="com.itcast.education.model.media.MediaOutput">
+    <resultMap id="baseMap" type="com.itcast.education.model.pojo.media.MediaOutput">
         <id column="media_id" jdbcType="BIGINT" property="mediaId"/>
         <result column="media_type" jdbcType="VARCHAR" property="mediaType"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -45,7 +45,7 @@
     </select>
 
     <!--条件查询媒体数据-->
-    <select id="find" resultType="com.itcast.education.model.media.MediaOutput">
+    <select id="find" resultType="com.itcast.education.model.pojo.media.MediaOutput">
         <include refid="baseSelect" />
         <where>
             <if test="mediaId != null">

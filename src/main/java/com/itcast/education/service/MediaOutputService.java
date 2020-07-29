@@ -1,7 +1,7 @@
 package com.itcast.education.service;
 
-import com.itcast.education.dto.HomePageDto;
-import com.itcast.education.model.media.MediaOutput;
+import com.itcast.education.model.dto.HomePageDto;
+import com.itcast.education.model.pojo.media.MediaOutput;
 
 import java.util.List;
 

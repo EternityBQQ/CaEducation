@@ -1,6 +1,6 @@
 package com.itcast.education.service;
 
-import com.itcast.education.model.course.Course;
+import com.itcast.education.model.pojo.course.Course;
 
 import java.util.List;
 

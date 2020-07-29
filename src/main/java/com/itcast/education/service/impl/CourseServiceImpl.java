@@ -2,13 +2,12 @@ package com.itcast.education.service.impl;
 
 import com.itcast.education.config.GeneralConstant;
 import com.itcast.education.mapper.CourseMapper;
-import com.itcast.education.model.course.Course;
-import com.itcast.education.model.user.User;
+import com.itcast.education.model.pojo.course.Course;
+import com.itcast.education.model.pojo.user.User;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.utils.CommonUtil;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;

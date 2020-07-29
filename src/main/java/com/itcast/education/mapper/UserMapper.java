@@ -1,6 +1,6 @@
 package com.itcast.education.mapper;
 
-import com.itcast.education.model.user.User;
+import com.itcast.education.model.pojo.user.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

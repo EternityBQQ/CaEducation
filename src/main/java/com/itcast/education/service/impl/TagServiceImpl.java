@@ -1,7 +1,7 @@
 package com.itcast.education.service.impl;
 
 import com.itcast.education.mapper.TagMapper;
-import com.itcast.education.model.course.Tag;
+import com.itcast.education.model.pojo.course.Tag;
 import com.itcast.education.service.TagService;
 import com.itcast.education.utils.ValidateUtil;
 import org.springframework.stereotype.Service;

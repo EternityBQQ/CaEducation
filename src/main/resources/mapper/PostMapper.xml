@@ -17,7 +17,7 @@
         FROM `ca_education`.`education_post` ep
     </sql>
     <!--新增-->
-    <insert id="save" parameterType="com.itcast.education.model.community.Post">
+    <insert id="save" parameterType="com.itcast.education.model.pojo.community.Post">
         INSERT INTO `ca_education`.`education_post` (
             `post_id`,
             `post_title`,
@@ -42,7 +42,7 @@
 	        #{createPerson} )
     </insert>
     <!--修改-->
-    <update id="update" parameterType="com.itcast.education.model.community.Post">
+    <update id="update" parameterType="com.itcast.education.model.pojo.community.Post">
         UPDATE `ca_education`.`education_post`
         SET `post_title` = #{postTitle},
             `post_content` = #{postContent},
@@ -58,7 +58,7 @@
     </update>
 
     <!--列表-->
-    <select id="find" resultType="com.itcast.education.model.community.Post">
+    <select id="find" resultType="com.itcast.education.model.pojo.community.Post">
         <include refid="baseQuery" />
         <where>
             <if test="postId != null and postId != ''">

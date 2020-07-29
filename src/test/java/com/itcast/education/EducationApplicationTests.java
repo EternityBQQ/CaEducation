@@ -1,8 +1,8 @@
 package com.itcast.education;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itcast.education.dto.CourseDto;
-import com.itcast.education.model.course.Course;
+import com.itcast.education.model.dto.CourseDto;
+import com.itcast.education.model.pojo.course.Course;
 import com.itcast.education.utils.CommonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

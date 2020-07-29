@@ -15,7 +15,7 @@
             ec.update_person
         FROM `ca_education`.`education_comment` ec
     </sql>
-    <insert id="save" parameterType="com.itcast.education.model.community.Comment">
+    <insert id="save" parameterType="com.itcast.education.model.pojo.community.Comment">
         INSERT INTO `ca_education`.`education_comment` (
             `comment_content`,
             `comment_user_id`,
@@ -37,7 +37,7 @@
     </insert>
 
     <!--列表-->
-    <select id="find" resultType="com.itcast.education.model.community.Comment">
+    <select id="find" resultType="com.itcast.education.model.pojo.community.Comment">
         <include refid="baseQuery"/>
         <where>
             <if test="commentId != null and commentId != ''">

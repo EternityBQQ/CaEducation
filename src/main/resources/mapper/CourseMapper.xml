@@ -13,7 +13,7 @@
         FROM education_course ec
     </sql>
     <!--结果集映射-->
-    <resultMap id="baseMap" type="com.itcast.education.model.course.Course">
+    <resultMap id="baseMap" type="com.itcast.education.model.pojo.course.Course">
         <id column="course_id" jdbcType="VARCHAR" property="courseId"/>
         <result column="course_name" jdbcType="VARCHAR" property="courseName"/>
         <result column="tags" jdbcType="VARCHAR" property="tags"/>
@@ -23,7 +23,7 @@
         <result column="course_url" jdbcType="VARCHAR" property="courseUrl"/>
     </resultMap>
     <!--列表查询-->
-    <select id="queryCourses" parameterType="com.itcast.education.model.course.Course" resultMap="baseMap">
+    <select id="queryCourses" parameterType="com.itcast.education.model.pojo.course.Course" resultMap="baseMap">
         <include refid="baseSelect"/>
         <where>
             <if test="course.courseId != null and course.courseId != ''">
@@ -38,7 +38,7 @@
         </if>
     </select>
     <!--新增课程-->
-    <insert id="addCourse" parameterType="com.itcast.education.model.course.Course">
+    <insert id="addCourse" parameterType="com.itcast.education.model.pojo.course.Course">
         INSERT INTO education_course (
             `course_id`,
             `course_name`,
@@ -60,7 +60,7 @@
             #{createTime},
             #{createPerson})
     </insert>
-    <update id="updateCourse" parameterType="com.itcast.education.model.course.Course">
+    <update id="updateCourse" parameterType="com.itcast.education.model.pojo.course.Course">
         UPDATE education_course
         SET `course_name` = #{courseName},
             `tags` = #{tags},

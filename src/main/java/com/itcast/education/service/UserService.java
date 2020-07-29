@@ -1,7 +1,7 @@
 package com.itcast.education.service;
 
-import com.itcast.education.model.base.ResponseModel;
-import com.itcast.education.model.user.User;
+import com.itcast.education.model.pojo.base.ResponseModel;
+import com.itcast.education.model.pojo.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

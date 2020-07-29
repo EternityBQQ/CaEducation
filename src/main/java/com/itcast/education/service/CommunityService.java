@@ -1,8 +1,8 @@
 package com.itcast.education.service;
 
-import com.itcast.education.dto.CommentDto;
-import com.itcast.education.dto.CommunityPageDto;
-import com.itcast.education.dto.PostDto;
+import com.itcast.education.model.dto.CommentDto;
+import com.itcast.education.model.dto.CommunityPageDto;
+import com.itcast.education.model.dto.PostDto;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 
 /**

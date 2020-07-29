@@ -1,9 +1,9 @@
 package com.itcast.education.controller.course;
 
 import com.itcast.education.config.ErrorMessage;
-import com.itcast.education.dto.CourseDto;
-import com.itcast.education.model.base.ResponseModel;
-import com.itcast.education.model.course.Course;
+import com.itcast.education.model.dto.CourseDto;
+import com.itcast.education.model.pojo.base.ResponseModel;
+import com.itcast.education.model.pojo.course.Course;
 import com.itcast.education.service.CourseService;
 import com.itcast.education.utils.CommonUtil;
 import io.swagger.annotations.Api;

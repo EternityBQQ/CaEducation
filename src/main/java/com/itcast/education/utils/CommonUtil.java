@@ -1,8 +1,7 @@
 package com.itcast.education.utils;
 
 import com.itcast.education.config.GeneralConstant;
-import com.itcast.education.model.community.Comment;
-import com.itcast.education.model.user.User;
+import com.itcast.education.model.pojo.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author zheng.zhang

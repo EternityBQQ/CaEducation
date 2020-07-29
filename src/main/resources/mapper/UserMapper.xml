@@ -17,7 +17,7 @@
         FROM education_user eu
     </sql>
     <!--结果集映射-->
-    <resultMap id="baseMap" type="com.itcast.education.model.user.User">
+    <resultMap id="baseMap" type="com.itcast.education.model.pojo.user.User">
         <id column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
@@ -31,7 +31,7 @@
         <result column="create_person" jdbcType="VARCHAR" property="createPerson"/>
     </resultMap>
     <!--列表查询-->
-    <select id="findUser" parameterType="com.itcast.education.model.user.User" resultMap="baseMap">
+    <select id="findUser" parameterType="com.itcast.education.model.pojo.user.User" resultMap="baseMap">
         <include refid="baseSelect"/>
         <where>
             <if test="userId != null and userId != ''">
@@ -44,7 +44,7 @@
     </select>
 
     <!--保存用户信息-->
-    <insert id="saveUser" parameterType="com.itcast.education.model.user.User">
+    <insert id="saveUser" parameterType="com.itcast.education.model.pojo.user.User">
         INSERT INTO `ca_education`.`education_user` (
             `user_id`,
             `username`,
