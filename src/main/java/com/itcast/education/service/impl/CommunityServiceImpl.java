@@ -302,7 +302,7 @@ public class CommunityServiceImpl implements CommunityService {
     @SuppressWarnings("all")
     public boolean sendComment(CommentDto commentDto, String userToken) {
         boolean result = false;
-        Comment comment = (Comment) commonUtil.convertDto2Entity(commentDto, Comment.class);
+        Comment comment = (Comment) CommonUtil.convertDto2Entity(commentDto, Comment.class);
         User user = commonUtil.getLoginUsernameByToken(userToken);
         String userId = GeneralConstant.EMPTY;
         String username = GeneralConstant.COMMON_PERSON;

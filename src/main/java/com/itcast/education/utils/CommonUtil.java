@@ -15,7 +15,7 @@ import java.util.Date;
 
 /**
  * @author zheng.zhang
- * @description 公共工具类
+ * Description 公共工具类
  * @date 2020/4/27 17:01
  */
 @Component

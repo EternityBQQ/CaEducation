@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author zheng.zhang
- * @description 社区交流信息模块DTO
+ * Description 社区交流信息模块DTO
  * @date 2020/5/15 11:04
  */
 @Data

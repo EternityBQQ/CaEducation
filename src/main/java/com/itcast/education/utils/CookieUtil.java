@@ -1,5 +1,7 @@
 package com.itcast.education.utils;
 
+import com.itcast.education.config.GeneralConstant;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author zheng.zhang
- * @description Cookie工具类
+ * Description Cookie工具类
  * @date 2020/5/7 19:17
  */
 public class CookieUtil {
@@ -40,9 +42,10 @@ public class CookieUtil {
             if (expireTime > 0) {
                 cookie.setMaxAge(expireTime);
             }
-            if (null != request) {  // 设置域名的cookie
+            // 设置域名的cookie
+            if (null != request) {
                 String domainName = getDomainName(request);
-                if (!"localhost".equals(domainName)) {
+                if (!GeneralConstant.DOMAIN.equals(domainName)) {
                     cookie.setDomain(domainName);
                 }
             }
@@ -60,7 +63,7 @@ public class CookieUtil {
     private static final String getDomainName(HttpServletRequest request) {
         String domainName = null;
         String serverName = request.getRequestURL().toString();
-        if (serverName == null || serverName.equals("")) {
+        if (StringUtils.isNoneBlank(serverName)) {
             domainName = "";
         } else {
             serverName = serverName.toLowerCase();

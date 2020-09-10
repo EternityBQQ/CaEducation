@@ -7,7 +7,7 @@ import java.util.UUID;
 
 /**
  * @author zheng.zhang
- * @description 登录工具类
+ * Description 登录工具类
  * @date 2020/5/7 14:09
  */
 public class LoginUtil {

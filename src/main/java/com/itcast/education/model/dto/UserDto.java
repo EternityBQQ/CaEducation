@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author zheng.zhang
- * @description 用户信息DTO
+ * Description 用户信息DTO
  * @date 2020/5/8 12:56
  */
 @ApiModel(value = "用户信息")

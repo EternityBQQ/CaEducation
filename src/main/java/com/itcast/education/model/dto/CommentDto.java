@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author zheng.zhang
- * @description 评论DTO
+ * Description 评论DTO
  * @date 2020/6/10 14:46
  */
 @Data

@@ -5,6 +5,7 @@ import com.itcast.education.model.dto.HomePageDto;
 import com.itcast.education.model.pojo.base.ResponseModel;
 import com.itcast.education.service.MediaOutputService;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zheng.zhang
  */
 @Api(tags = "基础接口")
+@Slf4j
 @RestController
 @RequestMapping("/education")
 public class BaseController {
-    private Logger LOG = LoggerFactory.getLogger(CourseController.class);
     @Autowired
     private MediaOutputService mediaOutputService;
 
@@ -40,7 +41,7 @@ public class BaseController {
     public ResponseModel getMediaOutPut(Integer carouseSize, Integer categorySize) {
         // 封装首页DTO对象
         HomePageDto pageData = mediaOutputService.queryHomePageData(carouseSize, categorySize);
-        LOG.info("首页数据获取成功", pageData);
+        log.info("首页数据获取成功", pageData);
         return ResponseModel.ok(pageData);
     }
 }

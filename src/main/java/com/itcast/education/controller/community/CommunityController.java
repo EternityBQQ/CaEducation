@@ -10,6 +10,7 @@ import com.itcast.education.service.CommunityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,14 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zheng.zhang
- * @description 社区交流信息数据
+ * Description 社区交流信息数据
  * @date 2020/5/15 10:51
  */
 @RestController
 @Api(tags = "社区交流接口")
+@Slf4j
 @RequestMapping("/education")
 public class CommunityController {
-    private Logger LOG = LoggerFactory.getLogger(CommunityController.class);
     @Autowired
     private CommunityService communityService;
 
@@ -37,7 +38,6 @@ public class CommunityController {
         CommunityPageDto pageDto;
         try {
             pageDto = communityService.getCommunityPageData(pageDataSize);
-            LOG.info("社区数据获取成功", pageDto);
         } catch (JSONException e) {
             return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
         }

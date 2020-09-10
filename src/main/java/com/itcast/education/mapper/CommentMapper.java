@@ -12,6 +12,11 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
 
+    /**
+     * 查询评论信息
+     * @param comment 评论实体
+     * @return 评论集合
+     */
     List<Comment> find(Comment comment);
 
     /**

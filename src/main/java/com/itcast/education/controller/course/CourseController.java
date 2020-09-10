@@ -9,6 +9,7 @@ import com.itcast.education.utils.CommonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @Api(tags = "课程接口")
+@Slf4j
 @RequestMapping("/education")
 public class CourseController {
-    private Logger LOG = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired
     private CourseService courseService;
@@ -33,10 +34,10 @@ public class CourseController {
         Course course = (Course) CommonUtil.convertDto2Entity(courseDto, Course.class);
         boolean result = courseService.saveCourse(course, token);
         if (result) {
-            LOG.info("保存课程成功", course);
+            log.info("保存课程成功", course);
             return ResponseModel.ok();
         } else {
-            LOG.error("保存课程失败");
+            log.error("保存课程失败");
             return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, ErrorMessage.SAVE_FAILED);
         }
     }

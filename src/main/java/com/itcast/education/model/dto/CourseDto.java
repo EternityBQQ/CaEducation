@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author zheng.zhang
- * @description 课程DTO
+ * Description 课程DTO
  * @date 2020/4/27 16:41
  */
 @ApiModel(value = "课程")

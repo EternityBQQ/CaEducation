@@ -8,6 +8,7 @@ import com.itcast.education.model.pojo.user.User;
 import com.itcast.education.service.UserService;
 import com.itcast.education.utils.CommonUtil;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author zheng.zhang
- * @description 用户信息接口
+ * Description 用户信息接口
  * @date 2020/5/7 11:11
  */
 @Api(tags = "用户信息接口")
+@Slf4j
 @RestController
 @RequestMapping("/education")
 public class UserController {
-    private Logger LOG = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
@@ -50,11 +51,10 @@ public class UserController {
     public ResponseModel loginOut(HttpServletRequest request) {
         String token = request.getHeader(GeneralConstant.USER_TOKEN);
         try {
-            LOG.info("登出token: " + token);
-            ResponseModel responseModel = userService.loginOut(token);
-            return responseModel;
+            log.info("登出token: {}", token);
+            return userService.loginOut(token);
         } catch (Exception e) {
-            LOG.info("登出失败: " + token);
+            log.info("登出失败: {}", token);
             return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, GeneralConstant.PROGRESS_SERVLET);
         }
     }
@@ -65,10 +65,10 @@ public class UserController {
         User user = (User) CommonUtil.convertDto2Entity(userDto, User.class);
         boolean result = userService.saveOrUpdateUser(user);
         if (result) {
-            LOG.info("注册成功: " + user);
+            log.info("注册成功: " + user);
             return ResponseModel.ok();
         } else {
-            LOG.error("注册失败");
+            log.error("注册失败");
             return ResponseModel.build(ErrorMessage.DEFAULT_ERROR_CODE, ErrorMessage.SAVE_FAILED);
         }
     }

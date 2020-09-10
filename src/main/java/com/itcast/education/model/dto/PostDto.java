@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author zheng.zhang
- * @description 发帖DTO
+ * Description 发帖DTO
  * @date 2020/5/15 16:19
  */
 @ApiModel(value = "帖子DTO信息")

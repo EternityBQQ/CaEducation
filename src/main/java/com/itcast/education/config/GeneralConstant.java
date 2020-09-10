@@ -57,4 +57,5 @@ public class GeneralConstant {
     public static final String COMMENT_CONTENT = "comment_content";
     public static final String REPLY_COMMENTS = "reply_comments";
     public static final String CREATE_TIME = "create_time";
+    public static final String DOMAIN = "localhost";
 }

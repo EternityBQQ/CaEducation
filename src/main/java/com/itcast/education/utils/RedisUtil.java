@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author zheng.zhang
- * @description Redis工具类
+ * Description Redis工具类
  * @date 2020/5/7 10:42
  */
 @Component

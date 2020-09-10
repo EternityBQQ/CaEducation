@@ -17,7 +17,7 @@ import java.time.Duration;
 
 /**
  * @author zheng.zhang
- * @description Redis集成配置
+ * Description Redis集成配置
  * @date 2020/5/7 10:27
  */
 @Configuration

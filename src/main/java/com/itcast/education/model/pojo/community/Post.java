@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author zheng.zhang
- * @description 帖子实体
+ * Description 帖子实体
  * @date 2020/5/15 12:58
  */
 @Data
