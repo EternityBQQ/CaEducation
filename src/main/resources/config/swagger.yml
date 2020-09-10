@@ -1,12 +1,12 @@
 swagger:
   basePackage: com.itcast.education.controller
   contactEmail: 2215751025@qq.com
-  contactName: zheng.zhang
+  contactName: 涨涨
   contactUrl: https://github.com/EternityBQQ/CaEducation.git
   desc: 基于springBoot编写的RESful-API，CaEducation的后端swagger接口，统一在该平台示例。
   groupName: baseModule
   license: 涨涨开发
-  licenseUrl: javascript:void(0)
-  termsOfServiceUrl: javascript:void(0)
+  licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfServiceUrl: http://localhost/doc.html
   title: CaEducation测试Swagger APIs
   objectVersion: 0.0.1.SNAPSHOT
