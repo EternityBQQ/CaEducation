@@ -1,12 +1,15 @@
 package com.itcast.education.config;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import com.itcast.education.model.pojo.swagger.SwaggerProperties;
 import io.swagger.annotations.ApiOperation;
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.*;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
@@ -20,46 +23,38 @@ import java.util.List;
 
 /**
  * @author zheng.zhang
- * @description swagger 配置类
+ * Description swagger 配置类
  * @date 2020/4/27 9:38
  */
-@Data
-//@Configuration
-//@EnableSwagger2
-//@ConfigurationProperties(prefix = "swagger")
+@Configuration
+@EnableSwagger2
+@Import(BeanValidatorPluginsConfiguration.class)
+@EnableKnife4j
 public class SwaggerConfig {
-    private String title;
-    private String desc;
-    private String version;
-    private String termsOfServiceUrl;
-    private String license;
-    private String licenseUrl;
-    private String basePackage;
-    private String groupName;
-    private String contactName;
-    private String contactUrl;
-    private String contactEmail;
+    @Autowired
+    private SwaggerProperties swaggerProperties;
 
     /**
      * 创建该API的基本信息（这些基本信息会展现在文档页面中）
      * 访问地址：http://项目实际地址/swagger-ui.html
+     *
      * @return ApiInfo
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // swagger标题
-                .title(title)
+                .title(swaggerProperties.getTitle())
                 // 描述信息
-                .description(desc)
+                .description(swaggerProperties.getDesc())
                 // 版本号
-                .version(version)
+                .version(swaggerProperties.getObjectVersion())
                 // 项目地址
-                .termsOfServiceUrl(termsOfServiceUrl)
+                .termsOfServiceUrl(swaggerProperties.getTermsOfServiceUrl())
                 // 许可证信息
-                // .licenseUrl(licenseUrl)
-                // .license(license)
+                .licenseUrl(swaggerProperties.getLicenseUrl())
+                 .license(swaggerProperties.getLicense())
                 // 作者相关信息
-                .contact(new Contact(contactName, contactUrl, contactEmail))
+                .contact(new Contact(swaggerProperties.getContactName(), swaggerProperties.getContactUrl(), swaggerProperties.getContactEmail()))
                 .build();
     }
 
@@ -71,10 +66,10 @@ public class SwaggerConfig {
      */
     @Bean(value = "defaultApi")
     public Docket createRestApi() {
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 //组名
-                .groupName(groupName)
+                //.groupName(swaggerProperties.getGroupName())
                 // 将LocalDate类型全部转为String类型
                 .directModelSubstitute(LocalDate.class, String.class)
                 // 通用的模板替代
@@ -88,7 +83,7 @@ public class SwaggerConfig {
                 // 选择那些路径和api会生成document
                 .select()
                 // 对指定api进行监控
-                .apis(RequestHandlerSelectors.basePackage(basePackage))
+                .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 // 对所有路径进行监控
                 .paths(PathSelectors.any())
@@ -96,12 +91,12 @@ public class SwaggerConfig {
                 // securitySchemes与securityContexts作用为配置全局Authorization参数
                 .securitySchemes(securitySchemes())
                 .securityContexts(securityContexts());
-        return docket;
     }
 
     /**
      * API授权登录
-     * @return
+     *
+     * @return apiKey
      */
     private List<ApiKey> securitySchemes() {
         List<ApiKey> result = new ArrayList<>();
@@ -113,7 +108,8 @@ public class SwaggerConfig {
 
     /**
      * 接口授权
-     * @return
+     *
+     * @return securityContext
      */
     private List<SecurityContext> securityContexts() {
         List<SecurityContext> result = new ArrayList<>();
@@ -126,7 +122,8 @@ public class SwaggerConfig {
 
     /**
      * 默认验证
-     * @return
+     *
+     * @return securityReference
      */
     private List<SecurityReference> defaultAuth() {
         List<SecurityReference> references = new ArrayList<>();
@@ -139,7 +136,8 @@ public class SwaggerConfig {
 
     /**
      * 统一响应数据
-     * @return
+     *
+     * @return response
      */
     private List<ResponseMessage> responseMessage() {
         List<ResponseMessage> list = new ArrayList<>();

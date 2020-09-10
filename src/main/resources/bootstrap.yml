@@ -1,0 +1,15 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: education-provider
+  cloud:
+    nacos:
+      # 使用nacos作为配置中心
+      config:
+        namespace: 2db4af37-1555-4693-b6d2-6a610711d2a2
+        server-addr: 139.9.205.89:8848
+      # 使用 Nacos 作为服务注册中心
+      discovery:
+        namespace: 2db4af37-1555-4693-b6d2-6a610711d2a2
+        server-addr: 139.9.205.89:8848
