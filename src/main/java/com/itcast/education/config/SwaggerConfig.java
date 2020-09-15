@@ -69,7 +69,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 //组名
-                //.groupName(swaggerProperties.getGroupName())
+                .groupName(swaggerProperties.getGroupName())
                 // 将LocalDate类型全部转为String类型
                 .directModelSubstitute(LocalDate.class, String.class)
                 // 通用的模板替代

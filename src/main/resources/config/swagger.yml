@@ -4,7 +4,7 @@ swagger:
   contactName: 涨涨
   contactUrl: https://github.com/EternityBQQ/CaEducation.git
   desc: 基于springBoot编写的RESful-API，CaEducation的后端swagger接口，统一在该平台示例。
-  groupName: baseModule
+  groupName: 教育模块
   license: 涨涨开发
   licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfServiceUrl: http://localhost/doc.html
